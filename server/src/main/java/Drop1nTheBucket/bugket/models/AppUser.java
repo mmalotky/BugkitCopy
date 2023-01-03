@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class AppUser implements UserDetails {
     private int id;
-    private String username;
-    private String password;
-    private Collection<GrantedAuthority> authorities;
-    private boolean enabled;
+    private final String username;
+    private final String password;
+    private final Collection<GrantedAuthority> authorities;
+    private final boolean enabled;
 
     public AppUser(int id, String username, String password, boolean enabled, List<String> roles) {
         this.id = id;
@@ -63,5 +63,13 @@ public class AppUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

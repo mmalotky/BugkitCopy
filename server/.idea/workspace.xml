@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1643a0af-9727-4be1-946f-b83cbc0118c8" name="Changes" comment="server reboot">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Drop1nTheBucket/bugket/models/AppUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properities" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Drop1nTheBucket/bugket/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Drop1nTheBucket/bugket/App.java" afterDir="false" />
-    </list>
+    <list default="true" id="1643a0af-9727-4be1-946f-b83cbc0118c8" name="Changes" comment="+ server initial setup&#10;+ server dependencies&#10;+ sql user" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +62,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672780691077</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="+ server initial setup&#10;+ server dependencies&#10;+ sql user">
+      <created>1672783075560</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672783075560</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -86,6 +85,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="server reboot" />
-    <option name="LAST_COMMIT_MESSAGE" value="server reboot" />
+    <MESSAGE value="+ server initial setup&#10;+ server dependencies&#10;+ sql user" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ server initial setup&#10;+ server dependencies&#10;+ sql user" />
   </component>
 </project>
