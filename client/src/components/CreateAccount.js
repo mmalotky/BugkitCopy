@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
     const [loginData, setLoginData] = useState({username:"", password:"", passwordConfirm:""})
     const [valid, setValid] = useState(false);
     const [err, setErr] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = function (evt) {
         evt.preventDefault();
@@ -12,7 +14,26 @@ function CreateAccount() {
             return;
         }
 
-        
+        const submission = {username: loginData.username, password: loginData.password};
+
+        fetch("http://localhost:8080/api/create_account", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+              },
+            body: JSON.stringify(submission)
+        })
+        .then((response) => {
+            if(response.status === 201) {
+                console.log(response);
+                debugger;
+                navigate("/login");
+            }
+            else {
+                console.log(response);
+                setErr("Failed to create account.");
+            }
+        });
     }
 
     const handleChange = function (evt) {
