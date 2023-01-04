@@ -7,4 +7,5 @@ public interface AppUserRepository {
 
     AppUser findByUsername(String username);
 
+    AppUser create(AppUser user);
 }

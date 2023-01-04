@@ -16,6 +16,12 @@ public class AppUser implements UserDetails {
     private final Collection<GrantedAuthority> authorities;
     private final boolean enabled;
 
+    public AppUser(String username, String password, boolean enabled, List<String> roles) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities = convertRolesToAuthorities(roles);
+    }
     public AppUser(int id, String username, String password, boolean enabled, List<String> roles) {
         this.id = id;
         this.username = username;
