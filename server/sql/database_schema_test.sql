@@ -55,15 +55,15 @@ begin
 
     insert into registered_user(username,password_hash, role_id) values
 		("admin", "$2a$12$M97L0g/BETfVkdrWu98lWu29w1T232KW8CtJ8Q4XfP/NISiEy71xq", 3),
-        ('test', "$2a$10$7JquBL6mi2OO85djCq4jUecR/aKurpmW8Niv1ohxNtoJdoNZPrcKK", 1);
-
+    ('test', "$2a$10$7JquBL6mi2OO85djCq4jUecR/aKurpmW8Niv1ohxNtoJdoNZPrcKK", 1);
+        
     insert into reports(title, issue_description, replication_instructions, date_of_reporting, completion_status, user_id) values
 		("Bad Error", "It broke my computer", "Throw the computer into the lake", "2022-10-12", 0, 2),
-        ("Won't turn on", "My laptop won't turn on", "Watch all of Game of Thrones while unplugged", "2022-02-06", 0, 1);
+    ("Won't turn on", "My laptop won't turn on", "Watch all of Game of Thrones while unplugged", "2022-02-06", 0, 1);
 
 	insert into votes (user_id, report_id) values
 		(1, 1),
-        (2, 2);
+    (2, 2);
 end //
 delimiter ;
 
