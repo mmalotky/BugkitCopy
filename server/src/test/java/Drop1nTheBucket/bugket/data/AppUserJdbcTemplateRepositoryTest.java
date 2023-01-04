@@ -54,15 +54,15 @@ class AppUserJdbcTemplateRepositoryTest {
         List<String> roles = new ArrayList<>();
         roles.add("USER");
         AppUser user = new AppUser(
-                "test",
-                "$2a$12$3PhY0/FTNphEECCdkBmE6e.VbWgkZKNXuhBlnkkI9rvYlr4qvXqdi",
+                "test2",
+                "$2a$10$O62QNAVUXhWangiXFqTtDuXBlP9ObEZ6w7y1xnlEOA1ywB7dbQvPK",
                 true,
                 roles
         );
         AppUser actual = repository.create(user);
         assertNotNull(actual);
-        assertEquals("test", actual.getUsername());
-        assertEquals(2, actual.getId());
+        assertEquals("test2", actual.getUsername());
+        assertEquals(3, actual.getId());
         assertEquals("USER", String.valueOf(actual.getAuthorities().stream().findFirst().orElse(null)));
     }
 }
