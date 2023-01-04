@@ -37,19 +37,33 @@ class AppUserJdbcTemplateRepositoryTest {
     }
 
     @Test
-    void findByUsername() {
+    void shouldFindByUsername() {
         AppUser user = repository.findByUsername("admin");
         assertNotNull(user);
         assertEquals("admin", user.getUsername());
     }
 
     @Test
-    void create(){
+    void shouldNotFindMissing() {
+        AppUser user = repository.findByUsername("not a user");
+        assertNull(user);
+    }
+
+    @Test
+    void shouldCreate() {
         List<String> roles = new ArrayList<>();
         roles.add("USER");
-        AppUser user = new AppUser("test", "$2a$12$3PhY0/FTNphEECCdkBmE6e.VbWgkZKNXuhBlnkkI9rvYlr4qvXqdi", true, roles);
+        AppUser user = new AppUser(
+                "test",
+                "$2a$12$3PhY0/FTNphEECCdkBmE6e.VbWgkZKNXuhBlnkkI9rvYlr4qvXqdi",
+                true,
+                roles
+
+        );
         AppUser actual = repository.create(user);
         assertNotNull(actual);
         assertEquals("test", actual.getUsername());
+        assertEquals(2, actual.getId());
+        assertEquals("USER", String.valueOf(actual.getAuthorities().stream().findFirst().orElse(null)));
     }
 }

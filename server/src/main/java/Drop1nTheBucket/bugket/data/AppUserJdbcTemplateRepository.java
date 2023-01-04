@@ -39,8 +39,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     @Transactional
     public AppUser create(AppUser user){
         final String sql = """
-                insert into registered_user(username, password_hash, role_id) 
-                values (?, ?, ?);
+                insert into registered_user(username, password_hash, role_id)\s
+                		values (?, ?, (SELECT role_id from `role` where `name` = ?));
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -48,7 +48,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
-            ps.setInt(3, 1);
+            ps.setString(3, String.valueOf(user.getAuthorities().stream()
+                    .findFirst().orElse(null)));
             return ps;
         }, keyHolder);
 
