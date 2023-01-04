@@ -8,4 +8,6 @@ public interface AppUserRepository {
     AppUser findByUsername(String username);
 
     AppUser create(AppUser user);
+
+    boolean editUserRole(String username, String newRole);
 }
