@@ -1,5 +1,8 @@
 package Drop1nTheBucket.bugket.controllers;
 
+import Drop1nTheBucket.bugket.domain.AppUserService;
+import Drop1nTheBucket.bugket.domain.Result;
+import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +23,12 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtConverter jwtConverter;
+    private final AppUserService appUserService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtConverter jwtConverter) {
+    public AuthController(AuthenticationManager authenticationManager, JwtConverter jwtConverter, AppUserService appUserService) {
         this.authenticationManager = authenticationManager;
         this.jwtConverter = jwtConverter;
+        this.appUserService = appUserService;
     }
 
     @PostMapping("/api/authenticate")
@@ -47,5 +52,21 @@ public class AuthController {
         }
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
+
+    @PostMapping("/api/create_account")
+    public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+
+        Result<AppUser> result = appUserService.create(username, password);
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+        }
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("appUserId", result.getPayload().getId());
+        
+        return new ResponseEntity(map, HttpStatus.CREATED);
     }
 }
