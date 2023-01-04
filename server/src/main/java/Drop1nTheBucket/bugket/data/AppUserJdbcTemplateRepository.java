@@ -1,5 +1,6 @@
 package Drop1nTheBucket.bugket.data;
 
+import Drop1nTheBucket.bugket.App;
 import Drop1nTheBucket.bugket.models.AppUser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,11 +24,21 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
         List<String> roles = getRolesByUsername(username);
 
         final String sql = """
-                select registered_user_id, username, password_hash, enabled
+                select user_id, username, password_hash, enabled
                 from registered_user
                 where username = ?;
                 """;
 
-        return
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
+    }
+
+    private List<String> getRolesByUsername(String username){
+        final String sql = """
+                select name
+                from role
+                join registered_user ru on role.role_id = ru.role_id
+                where name = ?
+                """;
+        return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
 }
