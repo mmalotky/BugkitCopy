@@ -1,11 +1,7 @@
 drop database if exists capstone_project;
 create database capstone_project;
 
-
-
 use capstone_project;
-
-
 
 create table registered_user (
     registered_user_id int primary key auto_increment,
@@ -16,22 +12,15 @@ create table registered_user (
     references role(role_id)
 );
 
-
-
 create table role (
     role_id int primary key auto_increment,
     `name` varchar (50) not null unique
 );
 
-
-
-
 insert into role (`name`) values
     ('Client'),
     ('Developer'),
     ('Admin');
-
-
 
 create table reports (
     report_id int primary key auto_increment,
