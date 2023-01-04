@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Contact from './components/Contact';
+import CreateAccount from './components/CreateAccount';
 import Home from './components/Home';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -25,6 +26,7 @@ function App() {
           <Route index element={<Home/>}/>
           <Route path='contact' element={<Contact/>}/>
           <Route path='login' element={<Login setUser={setUser}/>}/>
+          <Route path='create_account' element={<CreateAccount/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Router>

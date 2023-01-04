@@ -19,7 +19,10 @@ function NavBar({setUser}) {
             {
                 context ?
                 <button onClick={handleLogout}>Logout</button> :
-                <Link to="/login">Login</Link>
+                <div>
+                    <Link to="/login">Login</Link>
+                    <Link to="/create_account">Create Account</Link>
+                </div>
             }
         </nav>
     );
