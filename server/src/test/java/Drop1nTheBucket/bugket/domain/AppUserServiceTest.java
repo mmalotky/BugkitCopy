@@ -19,7 +19,7 @@ class AppUserServiceTest {
 
     @Test
     void findByUsername() {
-        AppUser expected = service.findByUsername("test");
+        AppUser expected = (AppUser) service.loadUserByUsername("test");
         when(repository.findByUsername("test")).thenReturn(expected);
     }
 }

@@ -28,7 +28,7 @@ public class AppUserService implements UserDetailsService {
         AppUser appUser = appUserRepository.findByUsername(username);
 
         if (appUser == null || !appUser.isEnabled()) {
-            throw new UsernameNotFoundException(username = " not found");
+            throw new UsernameNotFoundException(username + " not found");
         }
         return appUser;
     }
@@ -41,7 +41,7 @@ public class AppUserService implements UserDetailsService {
 
         password = encoder.encode(password);
 
-        AppUser appUser = new AppUser(0, username, password, true, List.of("User"));
+        AppUser appUser = new AppUser(0, username, password, true, List.of("USER"));
 
         try {
             appUser = appUserRepository.create(appUser);

@@ -30,7 +30,7 @@ function Login({setUser}) {
         .then((jwtContainer) => {
             if(!jwtContainer) {return;}
 
-            const jwt = jwtContainer.jwt;
+            const jwt = jwtContainer.jwt_token;
             let userData = jwtDecode(jwt);
             userData.authorities = userData.authorities.split(",");
 
