@@ -58,7 +58,6 @@ class AppUserJdbcTemplateRepositoryTest {
                 "$2a$12$3PhY0/FTNphEECCdkBmE6e.VbWgkZKNXuhBlnkkI9rvYlr4qvXqdi",
                 true,
                 roles
-
         );
         AppUser actual = repository.create(user);
         assertNotNull(actual);
