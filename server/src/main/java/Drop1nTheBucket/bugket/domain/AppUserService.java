@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public class AppUserService implements UserDetailsService {
 
-
     private final AppUserRepository appUserRepository;
     private final PasswordEncoder encoder;
 
@@ -23,6 +22,11 @@ public class AppUserService implements UserDetailsService {
         this.appUserRepository = appUserRepository;
         this.encoder = encoder;
     }
+
+    public List<AppUser> getAllAppUsers() {
+        return appUserRepository.findAll();
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
@@ -60,7 +64,6 @@ public class AppUserService implements UserDetailsService {
             if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
                 result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
             }
-
             boolean success = appUserRepository.editUserRole(username, newRole);
             if(success){
                 result.addMessage(ActionStatus.SUCCESS,"Successfully edited");
@@ -90,6 +93,4 @@ public class AppUserService implements UserDetailsService {
         }
         return result;
     }
-
-
 }
