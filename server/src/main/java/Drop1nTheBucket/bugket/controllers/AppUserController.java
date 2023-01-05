@@ -15,7 +15,7 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
-    @PutMapping("/update_user/{username}/{newRole")
+    @PutMapping("/update_user/{username}/{newRole}")
     public ResponseEntity<?> updateUserRole(String username, String newRole) {
         Result<Void> result = appUserService.editUserRoleByUsername(username, newRole);
         if (!result.isSuccess()) {

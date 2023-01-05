@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Contact from './components/Contact';
 import CreateAccount from './components/CreateAccount';
@@ -19,6 +19,11 @@ function App() {
 
   const [user, setUser] = useState(currentUserData);
 
+  let admin = false;
+  if(user) {
+      admin = user.userData.authorities.includes("ADMIN");
+  }
+
   return (
     <AuthContext.Provider value={user}>
       <Router>
@@ -28,7 +33,7 @@ function App() {
           <Route path='contact' element={<Contact/>}/>
           <Route path='login' element={<Login setUser={setUser}/>}/>
           <Route path='create_account' element={<CreateAccount/>}/>
-          <Route path='edit_permissions' element={<EditPermissions/>}/>
+          <Route path='edit_permissions' element={admin ? <EditPermissions/> : <Navigate to='/'/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Router>
