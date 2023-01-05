@@ -22,10 +22,12 @@ public class AppUserController {
         this.appUserService = appUserService;
     }
 
+
     @GetMapping("/users")
     public List<AppUser> findAll(){
         return appUserService.getAllAppUsers();
     }
+
 
     @PutMapping("/update_user/{username}/{newRole}")
     public ResponseEntity<?> updateUserRole(String username, String newRole) {
