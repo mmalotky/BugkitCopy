@@ -17,21 +17,25 @@ function NavBar({setUser}) {
     }
 
     return (
-        <nav className="navbar">
-            <Link to="/">Home</Link>
-            <Link to="/contact">Contact Us</Link>
+        <nav className="navbar bg-light border-bottom">
+            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link" to="/contact">Contact Us</Link>
+            <Link className="nav-link" to="/bugs">View Bugs</Link>
             {
                 admin ?
-                <Link to="/edit_permissions">Edit Permissions</Link> :
+                <Link className="nav-link" to="/edit_permissions">Edit Permissions</Link> :
                 <></>
             }
             {
                 context ?
-                <button onClick={handleLogout}>Logout</button> :
-                <div>
-                    <Link to="/login">Login</Link>
-                    <Link to="/create_account">Create Account</Link>
-                </div>
+                <></> :
+                <Link className="nav-link" to="/create_account">Create Account</Link>
+            }
+
+            {
+                context ?
+                <button onClick={handleLogout} className="btn btn-danger">Logout</button> :
+                <Link to="/login" className="btn btn-primary">Login</Link>
             }
         </nav>
     );

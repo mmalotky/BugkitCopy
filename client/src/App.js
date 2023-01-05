@@ -9,6 +9,7 @@ import Login from './components/Login';
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
 import AuthContext from './context/AuthContext';
+import ViewBugs from './components/ViewBugs';
 
 function App() {
   let currentUserData = localStorage.getItem("userData");
@@ -30,6 +31,7 @@ function App() {
         <NavBar setUser={setUser}/>
         <Routes>
           <Route index element={<Home/>}/>
+          <Route path='bugs' element={<ViewBugs/>}/>
           <Route path='contact' element={<Contact/>}/>
           <Route path='login' element={<Login setUser={setUser}/>}/>
           <Route path='create_account' element={<CreateAccount/>}/>
