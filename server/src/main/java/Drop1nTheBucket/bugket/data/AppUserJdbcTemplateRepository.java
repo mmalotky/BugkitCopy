@@ -2,6 +2,7 @@ package Drop1nTheBucket.bugket.data;
 
 import Drop1nTheBucket.bugket.App;
 import Drop1nTheBucket.bugket.models.AppUser;
+import Drop1nTheBucket.bugket.models.TempAppUserDetails;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,6 +24,35 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
 
     @Override
+    public List<AppUser> findAll() {
+        List<AppUser> users = new ArrayList<>();
+
+        final String sql = """
+                select username, r.`name`
+                from registered_user
+                join `role` r on registered_user.role_id = r.role_id
+                """;
+
+        List<TempAppUserDetails> tempUsers = jdbcTemplate.query(sql, new TempAppUserDetailsMapper());
+
+        for(TempAppUserDetails tempUser : tempUsers){
+
+            String username = tempUser.getUsername();
+            List<String> roles = getRolesByUsername(username);
+
+            final String sql2 = """
+                select user_id, username, password_hash, enabled
+                from registered_user
+                where username = ?;
+                """;
+            AppUser user = jdbcTemplate.query(sql2, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
+            users.add(user);
+        }
+
+        return users;
+    }
+
+    @Override
     @Transactional
     public AppUser findByUsername(String username) {
         List<String> roles = getRolesByUsername(username);
@@ -32,7 +63,9 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
                 where username = ?;
                 """;
 
-        return jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
+        AppUser user = jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
+        int x = 0;
+        return user;
     }
 
     @Override
@@ -78,7 +111,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
                 select name
                 from role
                 join registered_user ru on role.role_id = ru.role_id
-                where name = ?
+                where username = ?
                 """;
         return jdbcTemplate.query(sql, (rs, rowId) -> rs.getString("name"), username);
     }
