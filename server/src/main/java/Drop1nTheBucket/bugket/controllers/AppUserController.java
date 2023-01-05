@@ -30,12 +30,12 @@ public class AppUserController {
 
 
     @PutMapping("/update_user/{username}/{newRole}")
-    public ResponseEntity<?> updateUserRole(String username, String newRole) {
+    public ResponseEntity<?> updateUserRole(@PathVariable String username, @PathVariable String newRole) {
         Result<Void> result = appUserService.editUserRoleByUsername(username, newRole);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(getStatus(result));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     private HttpStatus getStatus(Result<Void> result) {

@@ -63,14 +63,13 @@ public class AppUserService implements UserDetailsService {
         if(appUser != null){
             if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
                 result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
+                return result;
             }
             boolean success = appUserRepository.editUserRole(username, newRole);
-            if(success){
-                result.addMessage(ActionStatus.SUCCESS,"Successfully edited");
-            } else {
+            if(!success){
                 result.addMessage(ActionStatus.INVALID,"Failed to edit");
             }
-        }else {
+        } else {
              result.addMessage(ActionStatus.NOT_FOUND, "User not found");
         }
         return result;
