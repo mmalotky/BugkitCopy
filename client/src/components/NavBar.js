@@ -16,6 +16,7 @@ function NavBar({setUser}) {
         <nav className="navbar">
             <Link to="/">Home</Link>
             <Link to="/contact">Contact Us</Link>
+            <Link to="/edit_permissions">Edit Permissions</Link>
             {
                 context ?
                 <button onClick={handleLogout}>Logout</button> :

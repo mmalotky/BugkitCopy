@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Contact from './components/Contact';
 import CreateAccount from './components/CreateAccount';
+import EditPermissions from './components/EditPermissions';
 import Home from './components/Home';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -27,6 +28,7 @@ function App() {
           <Route path='contact' element={<Contact/>}/>
           <Route path='login' element={<Login setUser={setUser}/>}/>
           <Route path='create_account' element={<CreateAccount/>}/>
+          <Route path='edit_permissions' element={<EditPermissions/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </Router>
