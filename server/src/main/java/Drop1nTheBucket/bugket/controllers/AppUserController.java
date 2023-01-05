@@ -1,9 +1,7 @@
 package Drop1nTheBucket.bugket.controllers;
 
-import Drop1nTheBucket.bugket.App;
 import Drop1nTheBucket.bugket.domain.AppUserService;
 import Drop1nTheBucket.bugket.domain.Result;
-import Drop1nTheBucket.bugket.models.AppUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +16,15 @@ public class AppUserController {
     }
 
     @PutMapping("/update_user/{username}/{newRole")
-    public ResponseEntity<AppUser> updateUserRole(String username, String newRole) {
-        Result<AppUser> result = appUserService.editUserRoleByUsername(username, newRole);
+    public ResponseEntity<?> updateUserRole(String username, String newRole) {
+        Result<Void> result = appUserService.editUserRoleByUsername(username, newRole);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(getStatus(result, HttpStatus.NO_CONTENT));
+        return new ResponseEntity<>(getStatus(result));
     }
 
-    private HttpStatus getStatus(Result<AppUser> result, HttpStatus statusDefault) {
+    private HttpStatus getStatus(Result<Void> result) {
         switch (result.getStatus()) {
             case INVALID:
                 return HttpStatus.PRECONDITION_FAILED;
@@ -35,7 +33,7 @@ public class AppUserController {
             case NOT_FOUND:
                 return HttpStatus.NOT_FOUND;
         }
-        return statusDefault;
+        return HttpStatus.NO_CONTENT;
     }
 
 }

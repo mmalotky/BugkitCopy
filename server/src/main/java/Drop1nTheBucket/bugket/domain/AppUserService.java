@@ -3,6 +3,7 @@ package Drop1nTheBucket.bugket.domain;
 import Drop1nTheBucket.bugket.data.AppUserRepository;
 import Drop1nTheBucket.bugket.models.AppUser;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -52,13 +53,17 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
-    public Result<?> editUserRoleByUsername(String username, String newRole) throws UsernameNotFoundException {
+    public Result<Void> editUserRoleByUsername(String username, String newRole) throws UsernameNotFoundException {
         AppUser appUser = appUserRepository.findByUsername(username);
-        Result result = new Result();
+        Result<Void> result = new Result<>();
         if(appUser != null){
-            boolean success = appUserRepository.editByUsername(username, newRole);
+            if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+                result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
+            }
+
+            boolean success = appUserRepository.editUserRole(username, newRole);
             if(success){
-                result.addMessage(ActionStatus.SUCCESS,"Sucessfully edited");
+                result.addMessage(ActionStatus.SUCCESS,"Successfully edited");
             } else {
                 result.addMessage(ActionStatus.INVALID,"Failed to edit");
             }
