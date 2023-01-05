@@ -52,6 +52,22 @@ public class AppUserService implements UserDetailsService {
         return result;
     }
 
+    public Result<?> editUserRoleByUsername(String username, String newRole) throws UsernameNotFoundException {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        Result result = new Result();
+        if(appUser != null){
+            boolean success = appUserRepository.editByUsername(username, newRole);
+            if(success){
+                result.addMessage(ActionStatus.SUCCESS,"Sucessfully edited");
+            } else {
+                result.addMessage(ActionStatus.INVALID,"Failed to edit");
+            }
+        }else {
+             result.addMessage(ActionStatus.NOT_FOUND, "User not found");
+        }
+        return result;
+    }
+
     private Result<AppUser> validate(String username, String password) {
         Result<AppUser> result = new Result<>();
         if (username == null || username.isBlank()) {
@@ -69,5 +85,6 @@ public class AppUserService implements UserDetailsService {
         }
         return result;
     }
+
 
 }

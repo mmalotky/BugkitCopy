@@ -62,6 +62,17 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
         return user;
     }
 
+    public boolean editUserRole(String username, String newRole){
+        final String sql = """
+                update registered_user set
+                role_id = (select role_id from `role` where `name` = ?)
+                where username = ?
+                """;
+
+        return jdbcTemplate.update(sql,
+                newRole, username) > 0;
+    }
+
     private List<String> getRolesByUsername(String username){
         final String sql = """
                 select name
