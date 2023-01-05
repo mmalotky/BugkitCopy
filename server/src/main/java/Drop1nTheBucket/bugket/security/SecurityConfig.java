@@ -27,9 +27,12 @@ public class SecurityConfig {
         http.cors();
 
         http.authorizeRequests()
-                .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/create_account").permitAll()
-                .antMatchers(HttpMethod.GET, "/bugs").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/create_account").permitAll()
+                .antMatchers(HttpMethod.GET, "api/reports").permitAll()
+                .antMatchers(HttpMethod.GET, "api/users").permitAll()
+                .antMatchers(HttpMethod.POST, "api/update_user/**").hasAnyRole("ADMIN")
+                .antMatchers("*").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(authenticationConfiguration), jwtConverter))
                 .sessionManagement()

@@ -5,9 +5,12 @@ function EditPermissions() {
     const [userList, setUserList] = useState([]);
 
     const getAll = function() {
-        fetch("http://localhost:8080/api/user_list")
+        fetch("http://localhost:8080/api/users")
         .then((response) => {return response.json()})
-        .then((json) => {setUserList(json)})
+        .then((json) => {
+            const newList = json.filter((j) => {return j.authorities[0].authority !== "ADMIN"})
+            setUserList(newList);
+        })
     }
 
     useEffect(getAll, []);
@@ -17,7 +20,7 @@ function EditPermissions() {
             <h3>Edit Permissions</h3>
             {userList.length === 0 ? <div>Loading...</div> :
                 userList.map((u) => {
-                    return <UserPermission username={u.username} role={u.role}/>
+                    return <UserPermission key={u.username} username={u.username} role={u.authorities[0].authority}/>
                 })}
         </div>
     );
