@@ -6,13 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,6 +34,17 @@ class AppUserJdbcTemplateRepositoryTest {
         }
     }
 
+
+    @Test
+    void shouldFindAll(){
+        List<AppUser> users = repository.findAll();
+        assertEquals("admin",users.get(0).getUsername());
+        assertEquals("ADMIN",users.get(0).getAuthorities().stream().toList().get(0).toString());
+
+        assertEquals("test",users.get(1).getUsername());
+        assertEquals("USER",users.get(1).getAuthorities().stream().toList().get(0).toString());
+
+    }
     @Test
     void shouldFindByUsername() {
         AppUser user = repository.findByUsername("admin");
@@ -71,5 +80,4 @@ class AppUserJdbcTemplateRepositoryTest {
         boolean actual = repository.editUserRole("test","DEV");
         assertEquals(true, actual);
     }
-
 }
