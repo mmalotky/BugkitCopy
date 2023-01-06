@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.data;
 
-import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.Report;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -22,10 +21,12 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
     @Override
     public List<Report> findAll() {
         final String sql = """
-                select report_id, title, issue_description, 
-                replication_instructions, date_of_reporting, completion_status, ru.username
-                from reports
-                inner join registered_user ru on reports.user_id = ru.user_id;
+                SELECT report_id, title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username,
+                    (SELECT count(user_id) from votes
+                    where report_id = r.report_id
+                    group by report_id)  vote_count
+                from reports r
+                inner join registered_user ru on r.user_id = ru.user_id;
                 """;
         return jdbcTemplate.query(sql, new ReportMapper());
     }
@@ -33,10 +34,12 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
     @Override
     public List<Report> findIncomplete() {
         final String sql = """
-                select report_id, title, issue_description, 
-                replication_instructions, date_of_reporting, completion_status, ru.username
-                from reports             
-                inner join registered_user ru on reports.user_id = ru.user_id
+                SELECT report_id, title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username,
+                    (SELECT count(user_id) from votes
+                    where report_id = r.report_id
+                    group by report_id)  vote_count
+                from reports r
+                inner join registered_user ru on r.user_id = ru.user_id
                 where completion_status = 0;
                 """;
         return jdbcTemplate.query(sql, new ReportMapper());
@@ -45,30 +48,38 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
     @Override
     public List<Report> findByUsername(String username){
         final String sql = """
-                select title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username
+                SELECT report_id, title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username,
+                    (SELECT count(user_id) from votes
+                    where report_id = r.report_id
+                    group by report_id)  vote_count
                 from reports r
                 join registered_user ru on r.user_id = ru.user_id
-                where ru.username = ?
+                where ru.username = ?;
                 """;
         return jdbcTemplate.query(sql, new ReportMapper(), username);
     }
-// Tried figuring the sql join but couldn't -Alex
-//    @Override
-//    public List<Report> findByVote(String username){
-//        final String sql = """
-//                select title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username
-//                from reports r
-//                join registered_user ru on r.user_id = ru.user_id
-//                where ru.username = ?
-//                """;
-//        return jdbcTemplate.query(sql, new ReportMapper(), username);
-//    }
+
+    @Override
+    public List<Report> findByVote(String username){
+        final String sql = """
+                SELECT r.report_id, title, issue_description, replication_instructions, date_of_reporting, completion_status, ru.username,
+                    (SELECT count(user_id) from votes
+                    where report_id = r.report_id
+                    group by report_id)  vote_count
+                from reports r
+                inner join registered_user ru on r.user_id = ru.user_id
+                inner join votes v on r.report_id =  v.report_id
+                inner join registered_user u on v.user_id = u.user_id
+                where u.username = ?;
+                """;
+        return jdbcTemplate.query(sql, new ReportMapper(), username);
+    }
 
     @Override
     public Report create(Report report) {
         final String sql = """
-                insert into reports (title, issue_description, replication_instructions, date_of_reporting, completion_status, user_id)
-                values (?, ?, ?, ?, ?, (select user_id from registered_user where username = ?));
+                INSERT into reports (title, issue_description, replication_instructions, date_of_reporting, completion_status, user_id)
+                values (?, ?, ?, ?, ?, (SELECT user_id from registered_user where username = ?));
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -91,10 +102,15 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
         return report;
     }
 
+    @Override
+    public boolean updateStatus(int id, boolean status) {
+        final String sql = """
+                UPDATE reports set
+                completion_status = ?
+                where report_id = ?;
+                """;
 
-
-
-
-
-
+        return jdbcTemplate.update(sql,
+                status, id) > 0;
+    }
 }
