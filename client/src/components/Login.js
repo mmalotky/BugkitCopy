@@ -24,7 +24,7 @@ function Login({setUser}) {
             }
             else {
                 console.log(response);
-                setErr("Login Failed.");
+                setErr("Username and/or password is incorrect.");
             }
         })
         .then((jwtContainer) => {
@@ -54,15 +54,25 @@ function Login({setUser}) {
     }
 
     return (
-        <div className="container">
-            <h3>Login</h3>
+        <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5">
+            
             <form onSubmit={handleSubmit} className="form m-3">
-                <label className="form-label" htmlFor="username">Username</label>
-                <input type="text" className="form-control" id="username" onChange={handleChange} value={loginData.username}/>
-                <label className="form-label" htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" onChange={handleChange} value={loginData.password}/>
-                <button type="submit" className="btn btn-primary m-3">Login</button>
-                <p className="text-danger font-italic">{err}</p>
+                <div className="text-center mb-4">
+                    <h3>Login</h3>
+                </div>
+                <div className="d-flex mb-4">
+                    <label className="form-label" htmlFor="username">Username</label>
+                    <input type="text" className="form-control ml-2" id="username" onChange={handleChange} value={loginData.username}/>
+                </div>
+                <div className="d-flex">
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input type="password" className="form-control ml-2" id="password" onChange={handleChange} value={loginData.password}/>
+                </div>
+                
+                <div className="d-flex flex-column justify-content-center">
+                    <p className="text-danger font-italic text-center mt-3">{err}</p>
+                    <button type="submit" className="btn btn-primary ml-auto mr-auto">Login</button>
+                </div>
             </form>
         </div>
     );

@@ -52,17 +52,25 @@ function CreateAccount() {
     }
     
     return (
-        <div className="container">
+        <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5">
             <h3>Create Account</h3>
             <form onSubmit={handleSubmit} className="form m-3">
-                <label className="form-label" htmlFor="username">Username</label>
-                <input type="text" className="form-control" id="username" onChange={handleChange} value={loginData.username}/>
-                <label className="form-label" htmlFor="password">Password</label>
-                <input type="password" className="form-control" id="password" onChange={handleChange} value={loginData.password}/>
-                <label className="form-label" htmlFor="passwordConfirm">Confirm Password</label>
-                <input type="password" className="form-control" id="passwordConfirm" onChange={handleChange} value={loginData.passwordConfirm}/>
-                <button type="submit" className="btn btn-primary m-3">submit</button>
-                <p className="text-danger font-italic">{err}</p>
+                <div>
+                    <label className="form-label" htmlFor="username">Username</label>
+                    <input type="text" className="form-control" id="username" onChange={handleChange} value={loginData.username}/>
+                </div>
+                <div>
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input type="password" className="form-control" id="password" onChange={handleChange} value={loginData.password}/>
+                </div>
+                <div>
+                    <label className="form-label" htmlFor="passwordConfirm">Confirm Password</label>
+                    <input type="password" className="form-control" id="passwordConfirm" onChange={handleChange} value={loginData.passwordConfirm}/>
+                </div>
+                <div className="d-flex flex-column justify-content-center">
+                    <p className="text-danger font-italic text-center mt-2">{err}</p>
+                    <button type="submit" className="btn btn-primary ">submit</button>
+                </div>     
             </form>
         </div>
     );

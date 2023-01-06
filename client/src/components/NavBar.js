@@ -17,26 +17,32 @@ function NavBar({setUser}) {
     }
 
     return (
-        <nav className="navbar bg-light border-bottom">
-            <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/contact">Contact Us</Link>
-            <Link className="nav-link" to="/bugs">View Bugs</Link>
-            {
-                admin ?
-                <Link className="nav-link" to="/edit_permissions">Edit Permissions</Link> :
-                <></>
-            }
-            {
-                context ?
-                <></> :
-                <Link className="nav-link" to="/create_account">Create Account</Link>
-            }
+        <nav className="navbar bg-dark sticky-top">
+            <div className="container-fluid">
+                <ul className="nav navbar">
+                    <li><Link className="nav-link text-white" to="/">Home</Link></li>
+                    <li><Link className="nav-link text-white" to="/bugs">View Bugs</Link></li>
+                    <li><Link className="nav-link text-white" to="/contact">Contact Us</Link></li>
+                    {
+                        admin ?
+                        <Link className="nav-link text-white" to="/edit_permissions">Edit Permissions</Link> :
+                        <></>
+                    }
+                </ul>
+                <ul className="nav navbar navbar-right">
+                    {
+                        context ?
+                        <></> :
+                        <Link className="btn btn-primary mr-4" to="/create_account">Create Account</Link>
+                    }
 
-            {
-                context ?
-                <button onClick={handleLogout} className="btn btn-danger">Logout</button> :
-                <Link to="/login" className="btn btn-primary">Login</Link>
-            }
+                    {
+                        context ?
+                        <button onClick={handleLogout} className="btn btn-danger">Logout</button> :
+                        <Link to="/login" className="btn btn-primary">Login</Link>
+                    }
+                </ul>
+            </div>
         </nav>
     );
 }
