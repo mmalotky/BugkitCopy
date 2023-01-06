@@ -95,6 +95,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
         return user;
     }
 
+    @Override
     public boolean editUserRole(String username, String newRole){
         final String sql = """
                 update registered_user set
@@ -104,6 +105,15 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
         return jdbcTemplate.update(sql,
                 newRole, username) > 0;
+    }
+
+    @Override
+    public List<String> getRolesList() {
+        final String sql = """
+                select `name` from `role`;
+                """;
+
+        return jdbcTemplate.query(sql, (rs, row) -> {return rs.getString("name");});
     }
 
     private List<String> getRolesByUsername(String username){
