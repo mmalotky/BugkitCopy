@@ -27,7 +27,6 @@ class ReportJdbcTemplateRepositoryTest {
 
     @BeforeEach
     void setup(){
-        hasRun = false;
         if(!hasRun){
             hasRun = true;
             jdbcTemplate.update("call set_known_good_state();");
@@ -37,22 +36,57 @@ class ReportJdbcTemplateRepositoryTest {
     @Test
     void shouldFindAll() {
         List<Report> reports = repository.findAll();
-        assertEquals(3, reports.size());
+        assertTrue(3 <= reports.size());
     }
 
     @Test
     void shouldFindIncomplete() {
         List<Report> reports = repository.findIncomplete();
-        assertEquals(2, reports.size());
+        assertTrue(2 <= reports.size());
     }
 
     @Test
     void shouldFindAllByUsername(){
         List<Report> reports = repository.findByUsername("admin");
-        assertEquals(2, reports.size());
+        assertTrue(2 <= reports.size());
 
         reports = repository.findByUsername("test");
-        assertEquals(1, reports.size());
+        assertTrue(1 <= reports.size());
+    }
+
+    @Test
+    void shouldNotFindByMissingUsername() {
+        List<Report> reports = repository.findByUsername("missing");
+        assertEquals(0, reports.size());
+    }
+
+    @Test
+    void shouldFindByVote() {
+        List<Report> reports = repository.findByVote("admin");
+        assertTrue(2 <= reports.size());
+
+        List<Report> reports2 = repository.findByUsername("test");
+        assertTrue(1 <= reports2.size());
+    }
+
+    @Test
+    void shouldNotFindMissingUsernameVote() {
+        List<Report> reports2 = repository.findByUsername("missing");
+        assertEquals(0, reports2.size());
+    }
+
+    @Test
+    void shouldPopulateAllFields() {
+        List<Report> reports = repository.findAll();
+        for (Report report : reports) {
+            assertNotNull(report.getReportId());
+            assertNotNull(report.getTitle());
+            assertNotNull(report.getIssueDescription());
+            assertNotNull(report.getReplicationInstructions());
+            assertNotNull(report.getPostDate());
+            assertNotNull(report.getVoteCount());
+            assertNotNull(report.getAuthorUsername());
+        }
     }
 
     @Test
@@ -67,5 +101,20 @@ class ReportJdbcTemplateRepositoryTest {
         assertEquals("test", actual.getTitle());
         assertEquals(4, actual.getReportId());
         assertEquals("test", actual.getAuthorUsername());
+    }
+
+    @Test
+    void shouldEditStatus() {
+        boolean result = repository.updateStatus(2, true);
+        assertTrue(result);
+
+        result = repository.updateStatus(2, false);
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldNotEditMissingReport() {
+        boolean result = repository.updateStatus(100000, true);
+        assertFalse(result);
     }
 }

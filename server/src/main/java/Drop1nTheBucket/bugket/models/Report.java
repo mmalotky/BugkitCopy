@@ -25,7 +25,18 @@ public class Report {
     }
 
 
-
+    public Report(int reportId, String title, String issueDescription,
+                  String replicationInstructions, LocalDate postDate,
+                  int voteCount, boolean completionStatus, String authorUsername) {
+        this.reportId = reportId;
+        this.title = title;
+        this.issueDescription = issueDescription;
+        this.replicationInstructions = replicationInstructions;
+        this.postDate = postDate;
+        this.voteCount = voteCount;
+        this.completionStatus = completionStatus;
+        this.authorUsername = authorUsername;
+    }
 
     public int getReportId() {
         return reportId;
