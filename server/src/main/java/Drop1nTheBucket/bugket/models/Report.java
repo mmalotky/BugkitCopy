@@ -12,6 +12,21 @@ public class Report {
     private boolean completionStatus;
     private String authorUsername;
 
+    public Report(String title, String issueDescription,
+                  String replicationInstructions, LocalDate postDate,
+                  Boolean completionStatus, String authorUsername
+                  ){
+        this.title = title;
+        this.issueDescription = issueDescription;
+        this.replicationInstructions = replicationInstructions;
+        this.postDate = postDate;
+        this.completionStatus = completionStatus;
+        this.authorUsername = authorUsername;
+    }
+
+
+
+
     public int getReportId() {
         return reportId;
     }
