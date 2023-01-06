@@ -47,6 +47,7 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
                 """;
 
         //write prepared statements section
+        return null;
     }
 
 }

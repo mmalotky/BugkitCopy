@@ -8,4 +8,6 @@ public interface ReportRepository {
     List<Report> findAll();
 
     List<Report> findIncomplete();
+
+    Report create(Report report);
 }

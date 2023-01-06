@@ -6,6 +6,7 @@ import Drop1nTheBucket.bugket.models.AppUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
@@ -34,6 +35,15 @@ class AppUserServiceTest {
         AppUser expected = new AppUser("test","$2a$10$7JquBL6mi2OO85djCq4jUecR/aKurpmW8Niv1ohxNtoJdoNZPrcKK", true, userRole);
         AppUser actual = (AppUser) service.loadUserByUsername("test");
         assertEquals(expected.getUsername(), actual.getUsername());
+    }
+
+    @Test
+    void shouldNotFindMissing() {
+        try {
+            AppUser actual = (AppUser) service.loadUserByUsername("missing");
+        } catch (UsernameNotFoundException e) {
+            assertEquals("missing not found", e.getMessage());
+        }
     }
 
     @Test

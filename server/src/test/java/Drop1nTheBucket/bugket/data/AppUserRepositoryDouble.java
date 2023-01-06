@@ -48,7 +48,7 @@ public class AppUserRepositoryDouble implements AppUserRepository{
 
     @Override
     public boolean editUserRole(String username, String newRole) {
-        if(!newRole.equals("ADMIN") || !newRole.equals("DEV") || !newRole.equals("USER")){
+        if(!newRole.equals("ADMIN") && !newRole.equals("DEV") && !newRole.equals("USER")){
             return false;
         }
         return true;
