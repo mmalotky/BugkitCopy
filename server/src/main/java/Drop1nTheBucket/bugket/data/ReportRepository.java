@@ -14,4 +14,6 @@ public interface ReportRepository {
     Report create(Report report);
 
     List<Report> findByVote(String username);
+
+    boolean updateStatus(int id, boolean status);
 }

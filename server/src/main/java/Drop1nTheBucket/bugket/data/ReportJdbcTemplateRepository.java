@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.data;
 
-import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.Report;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -103,6 +102,7 @@ public class ReportJdbcTemplateRepository implements ReportRepository {
         return report;
     }
 
+    @Override
     public boolean updateStatus(int id, boolean status) {
         final String sql = """
                 UPDATE reports set
