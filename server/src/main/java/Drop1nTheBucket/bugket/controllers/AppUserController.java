@@ -29,7 +29,7 @@ public class AppUserController {
     }
 
 
-    @PutMapping("/update_user/{username}/{newRole}")
+    @PutMapping("/updateuser/{username}/{newRole}")
     public ResponseEntity<?> updateUserRole(@PathVariable String username, @PathVariable String newRole) {
         Result<Void> result = appUserService.editUserRoleByUsername(username, newRole);
         if (!result.isSuccess()) {

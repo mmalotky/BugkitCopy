@@ -32,7 +32,7 @@ public class AppUser implements UserDetails {
 
     private Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
         return roles.stream()
-                .map(SimpleGrantedAuthority::new)
+                .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
                 .collect(Collectors.toList());
     }
 

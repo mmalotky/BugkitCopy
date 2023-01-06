@@ -1,5 +1,6 @@
 package Drop1nTheBucket.bugket.security;
 
+import Drop1nTheBucket.bugket.models.AppUser;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +26,7 @@ public class JwtConverter {
 
     public String getTokenFromUser(UserDetails user) {
         String authorities = user.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
+                .map(authority -> authority.getAuthority().substring(5))
                 .collect(Collectors.joining(","));
 
         return Jwts.builder()
@@ -51,10 +52,9 @@ public class JwtConverter {
             String username = jws.getBody().getSubject();
             String authStr = (String) jws.getBody().get("authorities");
 
-            List<SimpleGrantedAuthority> roles = Arrays.stream(authStr.split(","))
-                    .map(SimpleGrantedAuthority::new)
+            List<String> roles = Arrays.stream(authStr.split(","))
                     .collect(Collectors.toList());
-            return new User(username, username, roles);
+            return new AppUser(username, null, true, roles);
         } catch (JwtException ex) {
             System.out.println(ex);
         }

@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import AuthContext from "../context/AuthContext";
 
 function UserPermission({username, role}) {
+    const context = useContext(AuthContext);
     const [newRole, setNewRole] = useState(role);
     const [message, setMessage] = useState("");
 
     const handleSubmit = function (evt) {
         evt.preventDefault();
 
-        fetch(`http://localhost:8080/api/update_user/${username}/${newRole}`, {
-            method: "PUT"
+        fetch(`http://localhost:8080/api/updateuser/${username}/${newRole}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${context.token}`
+            }
         })
         .then((response) => {
             if(response.status === 204) {

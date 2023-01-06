@@ -8,7 +8,7 @@ function EditPermissions() {
         fetch("http://localhost:8080/api/users")
         .then((response) => {return response.json()})
         .then((json) => {
-            const newList = json.filter((j) => {return j.authorities[0].authority !== "ADMIN"})
+            const newList = json.filter((j) => {return j.authorities[0].authority !== "ROLE_ADMIN"})
             setUserList(newList);
         })
     }
