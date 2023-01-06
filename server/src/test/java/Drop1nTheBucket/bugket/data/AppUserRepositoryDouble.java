@@ -42,15 +42,23 @@ public class AppUserRepositoryDouble implements AppUserRepository{
 
     @Override
     public AppUser create(AppUser user) {
-        all.add(user);
+        user.setId(3);
         return user;
     }
 
     @Override
     public boolean editUserRole(String username, String newRole) {
-        if(!newRole.equals("ADMIN") && !newRole.equals("DEV") && !newRole.equals("USER")){
-            return false;
-        }
         return true;
     }
+
+    @Override
+    public List<String> getRolesList() {
+        ArrayList<String> roles = new ArrayList<>();
+        roles.add("USER");
+        roles.add("DEV");
+        roles.add("ADMIN");
+        return roles;
+    }
+
+
 }

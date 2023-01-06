@@ -78,6 +78,13 @@ class AppUserJdbcTemplateRepositoryTest {
     @Test
     void shouldEditUserRole(){
         boolean actual = repository.editUserRole("test","DEV");
-        assertEquals(true, actual);
+        assertTrue(actual);
+    }
+
+    @Test
+    void shouldGetRoles() {
+        List<String> result = repository.getRolesList();
+        assertNotNull(result);
+        assertEquals(3, result.size());
     }
 }

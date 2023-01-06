@@ -14,4 +14,6 @@ public interface AppUserRepository {
     AppUser create(AppUser user);
 
     boolean editUserRole(String username, String newRole);
+
+    List<String> getRolesList();
 }

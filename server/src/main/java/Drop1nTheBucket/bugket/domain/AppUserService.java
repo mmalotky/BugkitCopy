@@ -30,6 +30,7 @@ public class AppUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+
         AppUser appUser = appUserRepository.findByUsername(username);
 
         if (appUser == null || !appUser.isEnabled()) {
@@ -40,6 +41,12 @@ public class AppUserService implements UserDetailsService {
 
     public Result<AppUser> create(String username, String password) {
         Result<AppUser> result = validate(username, password);
+
+        AppUser existing = appUserRepository.findByUsername(username);
+        if(existing != null) {
+            result.addMessage(ActionStatus.DUPLICATE, "Username " + username + " is taken.");
+        }
+
         if (!result.isSuccess()) {
             return result;
         }
@@ -58,19 +65,35 @@ public class AppUserService implements UserDetailsService {
     }
 
     public Result<Void> editUserRoleByUsername(String username, String newRole) throws UsernameNotFoundException {
-        AppUser appUser = appUserRepository.findByUsername(username);
         Result<Void> result = new Result<>();
-        if(appUser != null){
-            if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-                result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
-                return result;
-            }
-            boolean success = appUserRepository.editUserRole(username, newRole);
-            if(!success){
-                result.addMessage(ActionStatus.INVALID,"Failed to edit");
-            }
-        } else {
-             result.addMessage(ActionStatus.NOT_FOUND, "User not found");
+        if(username == null || newRole == null) {
+            result.addMessage(ActionStatus.INVALID, "Null fields");
+            return result;
+        }
+        if(username.isBlank() || newRole.isBlank()) {
+            result.addMessage(ActionStatus.INVALID, "Empty fields");
+            return result;
+        }
+
+        AppUser appUser = appUserRepository.findByUsername(username);
+
+        if(appUser == null) {
+            result.addMessage(ActionStatus.NOT_FOUND, "User not found");
+            return result;
+        }
+        if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+            result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
+            return result;
+        }
+
+        List<String> roles = appUserRepository.getRolesList();
+        if(!roles.contains(newRole)) {
+            result.addMessage(ActionStatus.INVALID, newRole + " not an existing role");
+        }
+
+        boolean success = appUserRepository.editUserRole(username, newRole);
+        if(!success){
+            result.addMessage(ActionStatus.INVALID,"Failed to edit");
         }
         return result;
     }
@@ -82,7 +105,7 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
 
-        if (password == null) {
+        if (password == null || password.isBlank()) {
             result.addMessage(ActionStatus.INVALID, "password is required");
             return result;
         }
