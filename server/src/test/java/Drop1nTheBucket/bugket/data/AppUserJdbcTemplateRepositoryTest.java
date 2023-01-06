@@ -39,10 +39,10 @@ class AppUserJdbcTemplateRepositoryTest {
     void shouldFindAll(){
         List<AppUser> users = repository.findAll();
         assertEquals("admin",users.get(0).getUsername());
-        assertEquals("ADMIN",users.get(0).getAuthorities().stream().toList().get(0).toString());
+        assertEquals("ROLE_ADMIN",users.get(0).getAuthorities().stream().toList().get(0).toString());
 
         assertEquals("test",users.get(1).getUsername());
-        assertEquals("USER",users.get(1).getAuthorities().stream().toList().get(0).toString());
+        assertEquals("ROLE_USER",users.get(1).getAuthorities().stream().toList().get(0).toString());
 
     }
     @Test
@@ -72,7 +72,7 @@ class AppUserJdbcTemplateRepositoryTest {
         assertNotNull(actual);
         assertEquals("test2", actual.getUsername());
         assertEquals(3, actual.getId());
-        assertEquals("USER", String.valueOf(actual.getAuthorities().stream().findFirst().orElse(null)));
+        assertEquals("ROLE_USER", String.valueOf(actual.getAuthorities().stream().findFirst().orElse(null)));
     }
 
     @Test

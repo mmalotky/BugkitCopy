@@ -9,7 +9,7 @@ function UserPermission({username, role}) {
     const handleSubmit = function (evt) {
         evt.preventDefault();
 
-        fetch(`http://localhost:8080/api/updateuser/${username}/${newRole}`, {
+        fetch(`http://localhost:8080/api/update_user/${username}/${newRole}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${context.token}`

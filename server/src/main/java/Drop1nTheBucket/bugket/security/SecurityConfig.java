@@ -14,11 +14,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final JwtConverter jwtConverter;
-    private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtConverter jwtConverter, UserDetailsService userDetailsService) {
+    public SecurityConfig(JwtConverter jwtConverter) {
         this.jwtConverter = jwtConverter;
-        this.userDetailsService = userDetailsService;
     }
 
     @Bean
@@ -31,7 +29,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/create_account").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/reports").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/updateuser/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/update_user/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(authenticationConfiguration), jwtConverter))

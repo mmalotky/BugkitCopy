@@ -26,7 +26,6 @@ function CreateAccount() {
         .then((response) => {
             if(response.status === 201) {
                 console.log(response);
-                debugger;
                 navigate("/login");
             }
             else {

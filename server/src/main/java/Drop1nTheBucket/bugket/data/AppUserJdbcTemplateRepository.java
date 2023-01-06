@@ -81,7 +81,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, String.valueOf(user.getAuthorities().stream()
-                    .findFirst().orElse(null)));
+                    .findFirst().orElse(null).toString().substring(5)));
             return ps;
         }, keyHolder);
 

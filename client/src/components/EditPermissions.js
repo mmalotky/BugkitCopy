@@ -20,7 +20,7 @@ function EditPermissions() {
             <h3>Edit Permissions</h3>
             {userList.length === 0 ? <div>Loading...</div> :
                 userList.map((u) => {
-                    return <UserPermission key={u.username} username={u.username} role={u.authorities[0].authority}/>
+                    return <UserPermission key={u.username} username={u.username} role={u.authorities[0].authority.substring(5)}/>
                 })}
         </div>
     );
