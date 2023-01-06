@@ -25,11 +25,12 @@ public class SecurityConfig {
         http.cors();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/create_account").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/reports").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/update_user/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/authenticate", "/api/create_account").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/reports/add").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/reports/incomplete").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author/*", "/api/reports/voted/*").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/reports").hasAnyRole("DEV", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/update_user/**", "/api/reports/update/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(authenticationConfiguration), jwtConverter))

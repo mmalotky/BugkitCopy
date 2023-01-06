@@ -81,7 +81,7 @@ public class AppUserService implements UserDetailsService {
             result.addMessage(ActionStatus.NOT_FOUND, "User not found");
             return result;
         }
-        if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
+        if(appUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             result.addMessage(ActionStatus.INVALID,"Cannot edit an admin");
             return result;
         }

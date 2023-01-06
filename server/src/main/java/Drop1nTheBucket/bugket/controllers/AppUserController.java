@@ -33,21 +33,9 @@ public class AppUserController {
     public ResponseEntity<?> updateUserRole(@PathVariable String username, @PathVariable String newRole) {
         Result<Void> result = appUserService.editUserRoleByUsername(username, newRole);
         if (!result.isSuccess()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    private HttpStatus getStatus(Result<Void> result) {
-        switch (result.getStatus()) {
-            case INVALID:
-                return HttpStatus.PRECONDITION_FAILED;
-            case DUPLICATE:
-                return HttpStatus.FORBIDDEN;
-            case NOT_FOUND:
-                return HttpStatus.NOT_FOUND;
-        }
-        return HttpStatus.NO_CONTENT;
     }
 
 }
