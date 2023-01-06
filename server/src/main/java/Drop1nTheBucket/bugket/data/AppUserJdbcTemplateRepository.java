@@ -64,7 +64,6 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
                 """;
 
         AppUser user = jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
-        int x = 0;
         return user;
     }
 

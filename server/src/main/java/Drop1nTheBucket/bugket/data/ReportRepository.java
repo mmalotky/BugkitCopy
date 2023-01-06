@@ -9,5 +9,7 @@ public interface ReportRepository {
 
     List<Report> findIncomplete();
 
+    List<Report> findByUsername(String username);
+
     Report create(Report report);
 }
