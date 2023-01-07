@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/authenticate", "/api/create_account").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/reports/add").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/reports/incomplete").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author/*", "/api/reports/voted/*").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author", "/api/reports/voted").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/reports").hasAnyRole("DEV", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/update_user/**", "/api/reports/update/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()

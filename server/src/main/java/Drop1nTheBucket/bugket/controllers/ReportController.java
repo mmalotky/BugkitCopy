@@ -2,17 +2,26 @@ package Drop1nTheBucket.bugket.controllers;
 
 import Drop1nTheBucket.bugket.domain.ReportsService;
 import Drop1nTheBucket.bugket.domain.Result;
+import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.Report;
+import Drop1nTheBucket.bugket.security.JwtConverter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
     ReportsService service;
+
+    @Autowired
+    JwtConverter jwtConverter;
 
     public ReportController(ReportsService service) {
         this.service = service;
@@ -28,18 +37,27 @@ public class ReportController {
         return service.getAllIncomplete();
     }
 
-    @GetMapping("/author/{username}")
-    public List<Report> getByUsername(@PathVariable String username) {
-        return service.getByUsername(username);
+    @GetMapping("/author")
+    public ResponseEntity<List<Report>> getByUsername(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        UserDetails user = jwtConverter.getUserFromToken(token);
+        String username = user.getUsername();
+        return new ResponseEntity<>(service.getByUsername(username), HttpStatus.OK);
     }
 
-    @GetMapping("/voted/{username}")
-    public List<Report> getByVote(@PathVariable String username) {
+    @GetMapping("/voted")
+    public List<Report> getByVote(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        UserDetails user = jwtConverter.getUserFromToken(token);
+        String username = user.getUsername();
         return service.getByVote(username);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Report report) {
+    public ResponseEntity<?> add(@RequestBody Report report, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        UserDetails user = jwtConverter.getUserFromToken(token);
+        if(!Objects.equals(report.getAuthorUsername(), user.getUsername())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         Result<Report> result = service.add(report);
         if (result.isSuccess()) {
             return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);

@@ -1,5 +1,5 @@
 @url = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMTExMzE5fQ.v_AWTewKrvFDSXzrIKcvmy6nPgJdafgtmIpEuPqiUYU
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzEzMzUxMn0.BaeXLY_4Lh2H0yzmiPcG4ko7ldRZh6EjKWxwucwC3fM
 
 ###
 
@@ -25,13 +25,13 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/api/reports/author/test
+GET {{url}}/api/reports/author
 Authorization: Bearer {{token}}
 
 
 ###
 
-GET {{url}}/api/reports/voted/test
+GET {{url}}/api/reports/voted
 Authorization: Bearer {{token}}
 
 
