@@ -1,5 +1,5 @@
 @url = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzEzMzUxMn0.BaeXLY_4Lh2H0yzmiPcG4ko7ldRZh6EjKWxwucwC3fM
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzEzNTMxNH0.Vh2NddqQt5q9BaTZxzgnz8ikZe1sYDrXoviqc72HvKw
 
 ###
 
@@ -54,5 +54,17 @@ Authorization: Bearer {{token}}
 
 PUT {{url}}/api/reports/update/4/true
 Authorization: Bearer {{token}}
+
+###
+
+POST {{url}}/api/vote/4
+Authorization: Bearer {{token}}
+
+
+###
+
+DELETE {{url}}/api/vote/4
+Authorization: Bearer {{token}}
+
 
 ###
