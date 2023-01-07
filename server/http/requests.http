@@ -1,4 +1,9 @@
-POST http://localhost:8080/api/authenticate HTTP/1.1
+@url = http://localhost:8080
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMTExMzE5fQ.v_AWTewKrvFDSXzrIKcvmy6nPgJdafgtmIpEuPqiUYU
+
+###
+
+POST {{url}}/api/authenticate HTTP/1.1
 content-type: application/json
 
 {
@@ -6,3 +11,48 @@ content-type: application/json
   "password": "test"
 }
 
+###
+
+GET {{url}}/api/reports
+Authorization: Bearer {{token}}
+
+
+###
+
+GET {{url}}/api/reports/incomplete
+Authorization: Bearer {{token}}
+
+
+###
+
+GET {{url}}/api/reports/author/test
+Authorization: Bearer {{token}}
+
+
+###
+
+GET {{url}}/api/reports/voted/test
+Authorization: Bearer {{token}}
+
+
+###
+
+POST {{url}}/api/reports/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Testing",
+    "issueDescription": "Testing",
+    "replicationInstructions": "1, 2, 3",
+    "postDate": "2022-03-11",
+    "completionStatus": false,
+    "authorUsername": "test"
+  }
+
+###
+
+PUT {{url}}/api/reports/update/4/true
+Authorization: Bearer {{token}}
+
+###
