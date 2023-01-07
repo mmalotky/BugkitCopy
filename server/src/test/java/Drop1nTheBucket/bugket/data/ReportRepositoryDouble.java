@@ -56,16 +56,12 @@ public class ReportRepositoryDouble implements ReportRepository{
 
     @Override
     public Report create(Report report) {
-        Report newReport = new Report("Ate my homework", "The program deleted my file", "Save a Word document at any time",
-                LocalDate.of(2022, 03, 13), false, "test");
-        newReport.setReportId(3);
-
-        return newReport;
+        return report;
     }
 
     @Override
     public boolean updateStatus(int id, boolean status) {
-        return false;
+        return status;
     }
 
 
