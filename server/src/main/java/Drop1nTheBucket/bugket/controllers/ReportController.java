@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.controllers;
 
-import Drop1nTheBucket.bugket.domain.ActionStatus;
 import Drop1nTheBucket.bugket.domain.ReportsService;
 import Drop1nTheBucket.bugket.domain.Result;
 import Drop1nTheBucket.bugket.models.Report;
@@ -8,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

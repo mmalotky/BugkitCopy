@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.data;
 
-import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.Report;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
