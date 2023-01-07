@@ -28,7 +28,7 @@ public class ReportsService {
         return repository.findByUsername(username);
     }
 
-    List<Report> getByVote(String username) {
+    public List<Report> getByVote(String username) {
         return repository.findByVote(username);
     }
 

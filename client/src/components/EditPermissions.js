@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext from "../context/AuthContext";
 import UserPermission from "./UserPermission";
 
 function EditPermissions() {
+    const context = useContext(AuthContext);
     const [userList, setUserList] = useState([]);
 
     const getAll = function() {
-        fetch("http://localhost:8080/api/users")
+        fetch("http://localhost:8080/api/users", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${context.token}`
+            }
+        })
         .then((response) => {return response.json()})
         .then((json) => {
             const newList = json.filter((j) => {return j.authorities[0].authority !== "ROLE_ADMIN"})

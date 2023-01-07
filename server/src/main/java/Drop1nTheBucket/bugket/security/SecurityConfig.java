@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,11 +24,12 @@ public class SecurityConfig {
         http.cors();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/create_account").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/reports").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-                .antMatchers(HttpMethod.PUT, "/api/update_user/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/authenticate", "/api/create_account").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/reports/add").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/reports/incomplete").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author", "/api/reports/voted").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/reports").hasAnyRole("DEV", "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/update_user/**", "/api/reports/update/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(authenticationConfiguration), jwtConverter))

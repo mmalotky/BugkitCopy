@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.data;
 
-import Drop1nTheBucket.bugket.domain.Result;
 import Drop1nTheBucket.bugket.models.Report;
 
 import java.time.LocalDate;

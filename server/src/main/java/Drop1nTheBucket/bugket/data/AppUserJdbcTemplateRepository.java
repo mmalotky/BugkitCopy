@@ -1,6 +1,5 @@
 package Drop1nTheBucket.bugket.data;
 
-import Drop1nTheBucket.bugket.App;
 import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.TempAppUserDetails;
 import org.springframework.jdbc.core.JdbcTemplate;
