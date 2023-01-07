@@ -12,6 +12,10 @@ public class Report {
     private boolean completionStatus;
     private String authorUsername;
 
+    public Report() {
+
+    }
+
     public Report(String title, String issueDescription,
                   String replicationInstructions, LocalDate postDate,
                   Boolean completionStatus, String authorUsername

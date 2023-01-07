@@ -52,7 +52,7 @@ public class ReportController {
     }
 
     @PutMapping("/update/{id}/{status}")
-    public ResponseEntity<?> updateStatus(int id, boolean status) {
+    public ResponseEntity<?> updateStatus(@PathVariable int id, @PathVariable boolean status) {
         Result<Void> result = service.updateStatus(id, status);
         if (result.isSuccess()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
