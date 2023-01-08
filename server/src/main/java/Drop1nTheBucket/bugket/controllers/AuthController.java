@@ -51,9 +51,8 @@ public class AuthController {
                 return new ResponseEntity<>(map, HttpStatus.OK);
             }
         } catch (AuthenticationException ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
-
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 

@@ -22,7 +22,7 @@ public class VoteJdbcTemplateRepository implements VoteRepository {
                 where v.report_id = ?;
                 """;
 
-        return jdbcTemplate.query(sql, (rs, row) -> {return rs.getString("username");}, reportId);
+        return jdbcTemplate.query(sql, (rs, row) -> rs.getString("username"), reportId);
     }
 
     @Override

@@ -62,8 +62,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
                 where username = ?;
                 """;
 
-        AppUser user = jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
-        return user;
+        return jdbcTemplate.query(sql, new AppUserMapper(roles), username).stream().findFirst().orElse(null);
     }
 
     @Override
@@ -79,8 +78,8 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
-            ps.setString(3, String.valueOf(user.getAuthorities().stream()
-                    .findFirst().orElse(null).toString().substring(5)));
+            ps.setString(3, user.getAuthorities().stream()
+                    .findFirst().orElse(null).toString().substring(5));
             return ps;
         }, keyHolder);
 
@@ -111,7 +110,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
                 select `name` from `role`;
                 """;
 
-        return jdbcTemplate.query(sql, (rs, row) -> {return rs.getString("name");});
+        return jdbcTemplate.query(sql, (rs, row) -> rs.getString("name"));
     }
 
     private List<String> getRolesByUsername(String username){

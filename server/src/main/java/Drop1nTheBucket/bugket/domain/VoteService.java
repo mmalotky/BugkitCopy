@@ -16,13 +16,10 @@ public class VoteService {
 
     public boolean checkVoters(String username, int reportId) {
         List<String> voters = repository.checkVoters(reportId);
-        if (voters.contains(username)) {
-            return true;
-        }
-        return false;
+        return voters.contains(username);
     }
     public Result<Void> addVote(String username, int reportId) {
-        Result<Void> result = new Result();
+        Result<Void> result = new Result<>();
         if (checkVoters(username, reportId)) {
             result.addMessage(ActionStatus.DUPLICATE, "You have already voted on this report");
             return result;

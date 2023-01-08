@@ -2,7 +2,6 @@ package Drop1nTheBucket.bugket.controllers;
 
 import Drop1nTheBucket.bugket.domain.ReportsService;
 import Drop1nTheBucket.bugket.domain.Result;
-import Drop1nTheBucket.bugket.models.AppUser;
 import Drop1nTheBucket.bugket.models.Report;
 import Drop1nTheBucket.bugket.security.JwtConverter;
 import org.springframework.beans.factory.annotation.Autowired;

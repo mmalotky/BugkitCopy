@@ -53,7 +53,7 @@ public class JwtConverter {
                     .collect(Collectors.toList());
             return new AppUser(username, null, true, roles);
         } catch (JwtException ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage());
         }
         return null;
     }

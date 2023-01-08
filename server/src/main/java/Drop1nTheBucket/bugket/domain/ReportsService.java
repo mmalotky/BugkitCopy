@@ -61,6 +61,7 @@ public class ReportsService {
 
         if (report == null) {
             result.addMessage(ActionStatus.INVALID, "Report cannot be null.");
+            return result;
         }
         if (report.getTitle() == null || report.getTitle().isBlank()) {
             result.addMessage(ActionStatus.INVALID, "Title is required.");
