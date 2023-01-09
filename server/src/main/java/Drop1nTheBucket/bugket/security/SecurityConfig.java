@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/api/reports/incomplete").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/reports/add", "/api/vote/*").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/api/vote/*").authenticated()
-                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author", "/api/reports/voted").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/users", "/api/reports/author", "/api/reports/voted", "/api/vote/check/*").authenticated()
                 .antMatchers(HttpMethod.GET, "/api/reports").hasAnyRole("DEV", "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/update_user/**", "/api/reports/update/**").hasRole("ADMIN")
                 .antMatchers("/**").denyAll()

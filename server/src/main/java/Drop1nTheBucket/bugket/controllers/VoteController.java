@@ -23,6 +23,15 @@ public class VoteController {
         this.service = service;
     }
 
+    @GetMapping("/check/{reportId}")
+    public ResponseEntity<Boolean> checkVoters(@PathVariable int reportId, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        UserDetails user = jwtConverter.getUserFromToken(token);
+        String username = user.getUsername();
+
+        boolean result = service.checkVoters(username, reportId);
+        return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+    }
+
     @PostMapping("/{reportId}")
     public ResponseEntity<?> addVote(@PathVariable int reportId, @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         UserDetails user = jwtConverter.getUserFromToken(token);
