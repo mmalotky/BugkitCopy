@@ -1,20 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 
-function ReportDetails() {
+function ReportDetails({report, refresh}) {
     const VOTE_URL = "http://localhost:8080/api/vote";
-    const [report, setReport] = useState(
-        {
-            "reportId": 1,
-            "title": "Bad Error",
-            "issueDescription": "It broke my computer",
-            "replicationInstructions": "Throw the computer into the lake",
-            "postDate": "2022-10-12",
-            "voteCount": 0,
-            "completionStatus": false,
-            "authorUsername": "test"
-          }
-    );
     
     const [voted, setVoted] = useState(false);
     
@@ -26,7 +14,7 @@ function ReportDetails() {
     }
 
     const checkVoters = function () {
-        if(!context) {
+        if(!context || !report) {
             return;
         }
 
@@ -46,13 +34,10 @@ function ReportDetails() {
                 console.log(response);
             }
         })
-        .then((json) => {
-            console.log(json);
-            setVoted(json);
-        })
+        .then(setVoted)
     }
     
-    useEffect(checkVoters, []);
+    useEffect(checkVoters, [report]);
 
     const submitVote = function () {
         fetch(VOTE_URL + "/" + report.reportId, {
@@ -63,7 +48,7 @@ function ReportDetails() {
         })
         .then((response) => {
             console.log(response);
-            checkVoters();
+            refresh();
         })
     }
 
@@ -76,7 +61,7 @@ function ReportDetails() {
         })
         .then((response) => {
             console.log(response);
-            checkVoters();
+            refresh();
         })
     }
 
@@ -89,6 +74,7 @@ function ReportDetails() {
         })
         .then((response) => {
             console.log(response);
+            refresh();
         })
     }
 
@@ -96,14 +82,16 @@ function ReportDetails() {
 
     if(!report) {
         return (
-            <div>
+            <div className="col">
+                <h3>Report Details</h3>
                 <p>Select a report for more retails.</p>
             </div>
         )
     }
 
     return (
-        <div>
+        <div className="col">
+            <h3>Report Details</h3>
             <h5>{report.title}</h5>
             {
                 report.completionStatus ?
