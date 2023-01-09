@@ -31,9 +31,16 @@ function NavBar({ setUser }) {
             </Link>
           </li>
           <li>
-            <Link className="nav-link text-white" to="/add">
-              Add a Bug
-            </Link>
+            {
+              context ? (
+                <Link className="nav-link text-white" to="/add">
+                  Add a Bug
+                </Link>
+              ) : (
+                <></>
+              )
+            }
+            
           </li>
           <li>
             <Link className="nav-link text-white" to="/contact">

@@ -38,7 +38,10 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="bugs" element={<ViewBugs />} />
-          <Route path="add" element={<ReportForm />} />
+          <Route 
+            path="add" 
+            element={user ? <ReportForm/> : <Navigate to="/"/>} 
+          />
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<Login setUser={setUser} />} />
           <Route path="create_account" element={<CreateAccount />} />
