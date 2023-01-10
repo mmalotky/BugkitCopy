@@ -61,6 +61,26 @@ function ViewBugs() {
         })
     }
 
+    const sortByVote = function () {
+        const sorted = [...reports].sort((a, b) => b.voteCount - a.voteCount);
+        setReports(sorted);
+    }
+
+    const sortByNewest = function () {
+        const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? 1 : -1);
+        setReports(sorted);
+    }
+
+    const sortByOldest = function () {
+        const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? -1 : 1);
+        setReports(sorted);
+    }
+
+    const sortByAuthor = function () {
+        const sorted = [...reports].sort((a, b) => b.authorUsername > a.authorUsername ? -1 : 1);
+        setReports(sorted);
+    }
+
     const updateReport = function () {
         let findReport = [];
         if(report) {
@@ -119,6 +139,10 @@ function ViewBugs() {
                         getAll = {getAll}
                         getMyReports = {getMyReports}
                         getVoted = {getVoted}
+                        sortByVote = {sortByVote}
+                        sortByNewest = {sortByNewest}
+                        sortByOldest = {sortByOldest}
+                        sortByAuthor = {sortByAuthor}
                     />
                     : <></>
                 }

@@ -1,5 +1,5 @@
-@url = http://localhost:8080
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzI4NzU1NX0.d9lFOIX_JAzd8mexzTW1yMuSLKFvDulYvdMYr3IEIBI
+@url = http://ec2-18-208-151-222.compute-1.amazonaws.com:8080
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzMyOTI0M30.vUyfLRD1cuWtxiy6GQJEfcU-MrDopXt-FktT6f6IF9U
 
 ###
 
