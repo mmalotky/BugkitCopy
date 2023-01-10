@@ -18,6 +18,8 @@ import ViewBugs from "./components/ViewBugs";
 import ReportForm from "./components/ReportForm";
 
 function App() {
+  const SERVER_URL = "http://localhost:8080";
+
   let currentUserData = localStorage.getItem("userData");
 
   if (currentUserData) {
@@ -37,17 +39,17 @@ function App() {
         <NavBar setUser={setUser} />
         <Routes>
           <Route index element={<Home />} />
-          <Route path="bugs" element={<ViewBugs />} />
+          <Route path="bugs" element={<ViewBugs SERVER_URL={SERVER_URL} />} />
           <Route 
             path="add" 
-            element={user ? <ReportForm/> : <Navigate to="/"/>} 
+            element={user ? <ReportForm SERVER_URL={SERVER_URL}/> : <Navigate to="/"/>} 
           />
           <Route path="contact" element={<Contact />} />
-          <Route path="login" element={<Login setUser={setUser} />} />
-          <Route path="create_account" element={<CreateAccount />} />
+          <Route path="login" element={<Login setUser={setUser} SERVER_URL={SERVER_URL}/>} />
+          <Route path="create_account" element={<CreateAccount SERVER_URL={SERVER_URL}/>} />
           <Route
             path="edit_permissions"
-            element={admin ? <EditPermissions /> : <Navigate to="/" />}
+            element={admin ? <EditPermissions SERVER_URL={SERVER_URL}/> : <Navigate to="/" />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
