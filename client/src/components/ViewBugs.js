@@ -95,32 +95,35 @@ function ViewBugs() {
     }
 
     return (
-        <div className="container row">
-            <ReportDetails
-                report = {report}
-                refresh = {refresh}
-            />
-            <div className="col">
-                <h3>Reports List</h3>
-                {reports.length === 0 ? <div>Loading...</div> :
-                reports.map((r) => {
-                    return <ReportListItem 
-                        key = {r.reportId}
-                        report = {r}
-                        setReport = {setReport}
-                    />
-                })}
-            </div>
-            {
-                context ?
-                <ViewFilter
-                    getIncomplete = {getIncomplete}
-                    getAll = {getAll}
-                    getMyReports = {getMyReports}
-                    getVoted = {getVoted}
+        <div className="container">
+            <div className="row bg-light p-5">
+                <ReportDetails
+                    report = {report}
+                    refresh = {refresh}
                 />
-                : <></>
-            }
+                <div className="col text-center m-3 p-3">
+                    <h3>Reports List</h3>
+                    {reports.length === 0 ? <div>Loading...</div> :
+                    reports.map((r) => {
+                        return <ReportListItem 
+                            key = {r.reportId}
+                            report = {r}
+                            setReport = {setReport}
+                        />
+                    })}
+                </div>
+                {
+                    context ?
+                    <ViewFilter
+                        getIncomplete = {getIncomplete}
+                        getAll = {getAll}
+                        getMyReports = {getMyReports}
+                        getVoted = {getVoted}
+                    />
+                    : <></>
+                }
+            </div>
+            
         </div>
     );
 }

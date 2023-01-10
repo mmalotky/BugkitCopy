@@ -82,7 +82,7 @@ function ReportDetails({report, refresh}) {
 
     if(!report) {
         return (
-            <div className="col">
+            <div className="col m-3 p-3">
                 <h3>Report Details</h3>
                 <p>Select a report for more retails.</p>
             </div>
@@ -90,22 +90,24 @@ function ReportDetails({report, refresh}) {
     }
 
     return (
-        <div className="col">
+        <div className="col text-center m-3 p-3">
             <h3>Report Details</h3>
-            <h5>{report.title}</h5>
-            {
-                report.completionStatus ?
-                <p>Complete</p>
-                : <p>Incomplete</p>
-            }
-            <p>By: {report.authorUsername}</p>
-            <p>Posted: {report.postDate}</p>
+            <div className="p-3 text-left bg-white border">
+                <h5>{report.title}</h5>
+                {
+                    report.completionStatus ?
+                    <p className="text-success">Complete</p>
+                    : <p className="text-danger">Incomplete</p>
+                }
+                <p>By: <span className="text-info text-uppercase">{report.authorUsername}</span> | Posted: {report.postDate}</p>
 
-            <h6>Issue Description</h6>
-            <p>{report.issueDescription}</p>
+                <h6>Issue Description</h6>
+                <p>{report.issueDescription}</p>
 
-            <h6>Replication Instructions</h6>
-            <p>{report.replicationInstructions}</p>
+                <h6>Replication Instructions</h6>
+                <p>{report.replicationInstructions}</p>
+            </div>
+            
 
             <p>Votes: {report.voteCount}</p>
 
@@ -113,19 +115,19 @@ function ReportDetails({report, refresh}) {
                 context ? 
                 (
                     voted ?
-                    <button type="button" onClick={removeVote}>Remove Vote</button>
-                    : <button type="button" onClick={submitVote}>Vote</button>
+                    <button className="btn btn-primary m-2" type="button" onClick={removeVote}>Remove Vote</button>
+                    : <button className="btn btn-primary m-2" type="button" onClick={submitVote}>Vote</button>
                 )
                 
                 : <></>
             }
-
+            <br/>
             {
                 admin ?
                 (
                     report.completionStatus ?
-                    <button type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
-                    : <button type="button" onClick={() => updateStatus(true)}>Mark as Complete</button>
+                    <button className="btn btn-danger m-2" type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
+                    : <button className="btn btn-success m-2" type="button" onClick={() => updateStatus(true)}>Mark as Complete</button>
                 )
                 : <></>
             }

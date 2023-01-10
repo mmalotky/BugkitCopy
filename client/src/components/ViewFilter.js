@@ -10,16 +10,16 @@ function ViewFilter({getIncomplete, getAll, getMyReports, getVoted}) {
     }
 
     return (
-        <div className="col">
+        <div className="col text-center m-3 p-3">
             <h3>Filter Reports</h3>
             {
                 admin ?
-                <button type="button" onClick={getAll}>View All</button>
+                <button className="w-100 h-25 bg-white border" type="button" onClick={getAll}>View All</button>
                 : <></>
             }
-            <button type="button" onClick={getIncomplete}>Incomplete</button>
-            <button type="button" onClick={getMyReports}>My Reports</button>
-            <button type="button" onClick={getVoted}>Voted</button>
+            <button className="w-100 h-25 bg-white border" type="button" onClick={getIncomplete}>Incomplete</button>
+            <button className="w-100 h-25 bg-white border" type="button" onClick={getMyReports}>My Reports</button>
+            <button className="w-100 h-25 bg-white border" type="button" onClick={getVoted}>Voted</button>
         </div>
     );
 }

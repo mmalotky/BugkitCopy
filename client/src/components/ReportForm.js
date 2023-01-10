@@ -112,13 +112,13 @@ export default function ReportForm() {
           />
         </div>
 
-        <div className="d-flex flex-column justify-content-center">
+        <div className="d-flex m-2 flex-column justify-content-center">
           <button type="submit" className="btn btn-primary ">
             Submit Report
           </button>
         </div>
 
-        <div className="d-flex flex-column justify-content-center">
+        <div className="d-flex m-2 flex-column justify-content-center">
           <button className="btn btn-danger" onClick={() => cancelAdd()}>
             Cancel Report
           </button>
