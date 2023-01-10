@@ -86,10 +86,10 @@ function ViewBugs() {
     const search = function (searchTerm) {
         let newList = [];
         reports.map((r) => {
-        if(!{...r}.title.toLowerCase().includes(searchTerm.toLowerCase())) {
-            newList.push(r);
-        }
-        return r;
+            if(!{...r}.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                newList.push(r);
+            }
+            return r;
         });
 
         setHidden(newList);
