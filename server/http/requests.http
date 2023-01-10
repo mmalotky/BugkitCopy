@@ -1,5 +1,7 @@
 @url = http://ec2-18-208-151-222.compute-1.amazonaws.com:8080
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoidGVzdCIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY3MzMyOTI0M30.vUyfLRD1cuWtxiy6GQJEfcU-MrDopXt-FktT6f6IF9U
+
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMzI5MjkyfQ.sn_GwwhrqmqkBK3hja0OYAwcRVJmj9hHbkp0OIDYzGQ
+
 
 ###
 
@@ -7,8 +9,8 @@ POST {{url}}/api/authenticate HTTP/1.1
 content-type: application/json
 
 {
-  "username": "test",
-  "password": "test"
+  "username": "admin",
+  "password": "root"
 }
 
 ###
