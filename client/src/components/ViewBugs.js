@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import ReportDetails from "./ReportDetails";
 import ReportListItem from "./ReportListItem";
+import SearchBar from "./SearchBar";
 import ViewFilter from "./ViewFilter";
 
 function ViewBugs() {
     const REPORT_URL = "http://localhost:8080/api/reports"
     const [reports, setReports] = useState([]);
     const [report, setReport] = useState();
+    const [hidden, setHidden] = useState([]);
     const [view, setView] = useState("");
     const context = useContext(AuthContext);
 
@@ -80,6 +82,18 @@ function ViewBugs() {
         const sorted = [...reports].sort((a, b) => b.authorUsername > a.authorUsername ? -1 : 1);
         setReports(sorted);
     }
+    
+    const search = function (searchTerm) {
+        let newList = [];
+        reports.map((r) => {
+        if(!{...r}.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+            newList.push(r);
+        }
+        return r;
+        });
+
+        setHidden(newList);
+    }
 
     const updateReport = function () {
         let findReport = [];
@@ -123,13 +137,15 @@ function ViewBugs() {
                 />
                 <div className="col text-center m-3 p-3">
                     <h3>Reports List</h3>
+                    <SearchBar search={search}/>
                     {reports.length === 0 ? <div>Loading...</div> :
                     reports.map((r) => {
-                        return <ReportListItem 
-                            key = {r.reportId}
-                            report = {r}
-                            setReport = {setReport}
-                        />
+                        return <div key = {r.reportId} className={hidden.includes(r) ? "d-none" : ""}>
+                            <ReportListItem
+                                report = {r}
+                                setReport = {setReport}
+                            />
+                        </div>
                     })}
                 </div>
                 {
