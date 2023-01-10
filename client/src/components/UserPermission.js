@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 
-function UserPermission({username, role}) {
+function UserPermission({username, role, SERVER_URL}) {
     const context = useContext(AuthContext);
     const [newRole, setNewRole] = useState(role);
     const [message, setMessage] = useState("");
@@ -9,7 +9,7 @@ function UserPermission({username, role}) {
     const handleSubmit = function (evt) {
         evt.preventDefault();
 
-        fetch(`http://localhost:8080/api/update_user/${username}/${newRole}`, {
+        fetch(`${SERVER_URL}/api/update_user/${username}/${newRole}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${context.token}`

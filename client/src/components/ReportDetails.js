@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 
-function ReportDetails({report, refresh}) {
-    const VOTE_URL = "http://localhost:8080/api/vote";
+function ReportDetails({report, refresh, SERVER_URL}) {
+    const VOTE_URL = SERVER_URL + "/api/vote";
     
     const [voted, setVoted] = useState(false);
     

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-export default function ReportForm() {
+export default function ReportForm({SERVER_URL}) {
   const [title, setTitle] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   const [replicationInstructions, setReplicationInstructions] = useState("");
@@ -29,7 +29,7 @@ export default function ReportForm() {
       postDate: today,
       authorUsername: name,
     };
-    fetch("http://localhost:8080/api/reports/add", {
+    fetch(SERVER_URL + "/api/reports/add", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${context.token}`,

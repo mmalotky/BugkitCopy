@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
-function Login({setUser}) {
+function Login({setUser, SERVER_URL}) {
     const navigate = useNavigate();
     const[loginData, setLoginData] = useState({username:"", password:""});
     const [err, setErr] = useState("");
@@ -10,7 +10,7 @@ function Login({setUser}) {
     const handleSubmit = function (evt) {
         evt.preventDefault();
         
-        fetch("http://localhost:8080/api/authenticate", {
+        fetch(SERVER_URL + "/api/authenticate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -5,8 +5,8 @@ import ReportListItem from "./ReportListItem";
 import SearchBar from "./SearchBar";
 import ViewFilter from "./ViewFilter";
 
-function ViewBugs() {
-    const REPORT_URL = "http://localhost:8080/api/reports"
+function ViewBugs({SERVER_URL}) {
+    const REPORT_URL = SERVER_URL + "/api/reports";
     const [reports, setReports] = useState([]);
     const [report, setReport] = useState();
     const [hidden, setHidden] = useState([]);
@@ -134,6 +134,7 @@ function ViewBugs() {
                 <ReportDetails
                     report = {report}
                     refresh = {refresh}
+                    SERVER_URL = {SERVER_URL}
                 />
                 <div className="col text-center m-3 p-3">
                     <h3>Reports List</h3>
