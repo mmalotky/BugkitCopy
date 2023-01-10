@@ -11,20 +11,26 @@ function ViewBugs({SERVER_URL}) {
     const [report, setReport] = useState();
     const [hidden, setHidden] = useState([]);
     const [view, setView] = useState("");
+    const [loaded, setLoaded] = useState(false);
     const context = useContext(AuthContext);
 
     const getIncomplete = function() {
+        setLoaded(false);
+
         fetch(REPORT_URL + "/incomplete")
         .then((response) => {return response.json()})
         .then((json) => {
             setReports(json);
             setView("INCOMPLETE");
+            setLoaded(true);
         })
     }
 
     useEffect(getIncomplete, []);
 
     const getAll = function() {
+        setLoaded(false);
+
         fetch(REPORT_URL, {
             headers: {
                 "Authorization": `Bearer ${context.token}`
@@ -34,10 +40,13 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("ALL");
+            setLoaded(true);
         })
     }
 
     const getMyReports = function() {
+        setLoaded(false);
+
         fetch(REPORT_URL + "/author", {
             headers: {
                 "Authorization": `Bearer ${context.token}`
@@ -47,10 +56,13 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("MY_REPORTS");
+            setLoaded(true);
         })
     }
 
     const getVoted = function() {
+        setLoaded(false);
+
         fetch(REPORT_URL + "/voted", {
             headers: {
                 "Authorization": `Bearer ${context.token}`
@@ -60,6 +72,7 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("VOTED");
+            setLoaded(true);
         })
     }
 
@@ -125,6 +138,9 @@ function ViewBugs({SERVER_URL}) {
             case "VOTED":
                 getVoted();
                 break;
+            default:
+                console.log("View not Recognised.");
+                break;
         }
     }
 
@@ -139,7 +155,7 @@ function ViewBugs({SERVER_URL}) {
                 <div className="col text-center m-3 p-3">
                     <h3>Reports List</h3>
                     <SearchBar search={search}/>
-                    {reports.length === 0 ? <div>Loading...</div> :
+                    {reports.length === 0 ? <div>{ loaded ? "No Reports Found" : "Loading..."}</div> :
                     reports.map((r) => {
                         return <div key = {r.reportId} className={hidden.includes(r) ? "d-none" : ""}>
                             <ReportListItem
@@ -160,6 +176,7 @@ function ViewBugs({SERVER_URL}) {
                         sortByNewest = {sortByNewest}
                         sortByOldest = {sortByOldest}
                         sortByAuthor = {sortByAuthor}
+                        view = {view}
                     />
                     : <></>
                 }

@@ -7,8 +7,10 @@ function EditPermissions(SERVER_URL) {
     const context = useContext(AuthContext);
     const [userList, setUserList] = useState([]);
     const [hidden, setHidden] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     const getAll = function() {
+        setLoaded(false);
         fetch(SERVER_URL + "/api/users", {
             method: "GET",
             headers: {
@@ -19,6 +21,7 @@ function EditPermissions(SERVER_URL) {
         .then((json) => {
             const newList = json.filter((j) => {return j.authorities[0].authority !== "ROLE_ADMIN"})
             setUserList(newList);
+            setLoaded(true);
         })
     }
 
@@ -41,7 +44,7 @@ function EditPermissions(SERVER_URL) {
             <h3>Edit Permissions</h3>
             <SearchBar search={search}/>
 
-            {userList.length === 0 ? <div>Loading...</div> :
+            {userList.length === 0 ? <div>{ loaded ? "No Users Found" : "Loading..."}</div> :
                 userList.map((u) => {
                     return <div key={u.username} className={hidden.includes(u) ? "d-none" : ""}>
                         <UserPermission 
