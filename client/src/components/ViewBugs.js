@@ -11,6 +11,7 @@ function ViewBugs({SERVER_URL}) {
     const [report, setReport] = useState();
     const [hidden, setHidden] = useState([]);
     const [view, setView] = useState("");
+    const [sorting, setSorting] = useState("");
     const [loaded, setLoaded] = useState(false);
     const context = useContext(AuthContext);
 
@@ -22,6 +23,7 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("INCOMPLETE");
+            setSorting("");
             setLoaded(true);
         })
     }
@@ -40,6 +42,7 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("ALL");
+            setSorting("");
             setLoaded(true);
         })
     }
@@ -56,6 +59,7 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("MY_REPORTS");
+            setSorting("");
             setLoaded(true);
         })
     }
@@ -72,6 +76,7 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("VOTED");
+            setSorting("");
             setLoaded(true);
         })
     }
@@ -79,21 +84,25 @@ function ViewBugs({SERVER_URL}) {
     const sortByVote = function () {
         const sorted = [...reports].sort((a, b) => b.voteCount - a.voteCount);
         setReports(sorted);
+        setSorting("VOTE");
     }
 
     const sortByNewest = function () {
         const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? 1 : -1);
         setReports(sorted);
+        setSorting("NEWEST");
     }
 
     const sortByOldest = function () {
         const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? -1 : 1);
         setReports(sorted);
+        setSorting("OLDEST");
     }
 
     const sortByAuthor = function () {
         const sorted = [...reports].sort((a, b) => b.authorUsername > a.authorUsername ? -1 : 1);
         setReports(sorted);
+        setSorting("AUTHOR");
     }
     
     const search = function (searchTerm) {
@@ -139,7 +148,24 @@ function ViewBugs({SERVER_URL}) {
                 getVoted();
                 break;
             default:
-                console.log("View not Recognised.");
+                getIncomplete();
+                break;
+        }
+
+        switch(sorting) {
+            case "VOTE":
+                sortByVote();
+                break;
+            case "NEWEST":
+                sortByNewest();
+                break;
+            case "OLDEST":
+                sortByOldest();
+                break;
+            case "AUTHOR":
+                sortByAuthor();
+                break;
+            default:
                 break;
         }
     }
@@ -177,6 +203,7 @@ function ViewBugs({SERVER_URL}) {
                         sortByOldest = {sortByOldest}
                         sortByAuthor = {sortByAuthor}
                         view = {view}
+                        sorting = {sorting}
                     />
                     : <></>
                 }
