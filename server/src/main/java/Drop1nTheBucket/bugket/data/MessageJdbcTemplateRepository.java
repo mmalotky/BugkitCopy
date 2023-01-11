@@ -32,9 +32,9 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
     }
 
     @Override
-    public Message create(Message message, String username, int reportId) {
+    public Message create(Message message) {
         final String sql = """
-                INSERT into messages (message, post_date, user_id, reportId)
+                INSERT into messages (message, post_date, user_id, report_id)
                 values (?,?,(SELECT user_id from registered_user where username = ?),?);
                 """;
 
@@ -44,7 +44,7 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
             ps.setString(1, message.getMessage());
             ps.setDate(2, java.sql.Date.valueOf(message.getPostDate()));
             ps.setString(3, message.getAuthorUsername());
-            ps.setInt(4, message.get)
+            ps.setInt(4, message.getReportId());
             return ps;
         }, keyHolder);
 
