@@ -1,5 +1,6 @@
 package Drop1nTheBucket.bugket.data;
 
+import Drop1nTheBucket.bugket.domain.Result;
 import Drop1nTheBucket.bugket.models.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,17 @@ class MessageJdbcTemplateRepositoryTest {
         Message actual = repository.create(message);
         assertNotNull(actual);
         assertEquals("test", message.getAuthorUsername());
+    }
+
+
+    @Test
+    void shouldDelete() {
+        assertTrue(repository.deleteMessage(1));
+    }
+
+    @Test
+    void shouldNotDeleteMissingMessage() {
+        assertFalse(repository.deleteMessage(99));
     }
 
 }
