@@ -18,7 +18,7 @@ import ViewBugs from "./components/ViewBugs";
 import ReportForm from "./components/ReportForm";
 
 function App() {
-  const SERVER_URL = "http://localhost:8080";
+  const SERVER_URL = "http://ec2-18-208-151-222.compute-1.amazonaws.com:8080";
 
   let currentUserData = localStorage.getItem("userData");
 
