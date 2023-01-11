@@ -58,5 +58,13 @@ public class Message {
     public void setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
     }
+
+    public int getReportId() {
+        return reportId;
+    }
+
+    public void setReportId(int reportId) {
+        this.reportId = reportId;
+    }
 }
 
