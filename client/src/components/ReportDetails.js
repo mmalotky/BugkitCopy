@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import Message from "./Message";
 
 function ReportDetails({report, refresh, SERVER_URL}) {
     const VOTE_URL = SERVER_URL + "/api/vote";
     
     const [voted, setVoted] = useState(false);
+    const [messages, setMessages] = useState([]);
     
     const context = useContext(AuthContext);
 
-    let admin = false;
+    let auth = false;
     if(context) {
-        admin = context.userData.authorities.includes("ADMIN");
+        auth = context.userData.authorities.includes("ADMIN") 
+        || context.userData.authorities.includes("DEV");
     }
 
     const checkVoters = function () {
@@ -66,7 +69,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
     }
 
     const updateStatus = function(status) {
-        fetch("http://localhost:8080/api/reports/update/" + report.reportId + "/" + status, {
+        fetch(SERVER_URL + "/api/reports/update/" + report.reportId + "/" + status, {
             method: "PUT",
             headers: {
                 "Authorization": `Bearer ${context.token}`
@@ -78,7 +81,18 @@ function ReportDetails({report, refresh, SERVER_URL}) {
         })
     }
 
-    
+    const getMessages = function () {
+        fetch(SERVER_URL + "/api/messages/" + report.reportId)
+        .then((response) => {
+            console.log(response);
+            return response.json();
+        })
+        .then((json) => {
+            setMessages(json);
+        })
+    }
+
+    useEffect(getMessages, [report]);
 
     if(!report) {
         return (
@@ -123,7 +137,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
             }
             <br/>
             {
-                admin ?
+                auth ?
                 (
                     report.completionStatus ?
                     <button className="btn btn-danger m-2" type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
@@ -131,6 +145,22 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 )
                 : <></>
             }
+            {
+                messages.length > 0 ?
+                <h4>Messages</h4>
+                : <></>
+            }
+            {
+                messages.map((message) => {
+                    return <Message 
+                        key={message.messageId} 
+                        message={message}
+                        SERVER_URL={SERVER_URL}
+                        getMessages={getMessages}
+                    />
+                })
+            }
+
         </div>
     );
 }
