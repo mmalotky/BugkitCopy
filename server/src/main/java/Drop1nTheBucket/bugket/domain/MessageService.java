@@ -1,5 +1,6 @@
 package Drop1nTheBucket.bugket.domain;
 
+
 import Drop1nTheBucket.bugket.data.MessageRepository;
 import Drop1nTheBucket.bugket.models.Message;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class MessageService {
         this.repository = repository;
     }
 
-    public List<Message> findAll(int reportId) {
+    public List<Message> getMessagesById(int reportId) {
         return repository.findAllForReport(reportId);
     }
 
@@ -51,5 +52,6 @@ public class MessageService {
             result.addMessage(ActionStatus.INVALID, "Message text cannot be null");
         }
         return result;
+
     }
 }
