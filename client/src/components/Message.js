@@ -10,7 +10,7 @@ function Message({message, SERVER_URL, getMessages}) {
     }
 
     const deleteMessage = function () {
-        fetch(SERVER_URL + "/" + message.messageId, {
+        fetch(SERVER_URL + "/api/messages/" + message.messageId, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${context.token}`
