@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-export default function ReportForm({SERVER_URL}) {
+export default function ReportForm({ SERVER_URL }) {
   const [title, setTitle] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   const [replicationInstructions, setReplicationInstructions] = useState("");
@@ -62,7 +62,7 @@ export default function ReportForm({SERVER_URL}) {
   };
 
   return (
-    <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5">
+    <div className="ml-5 mt-5">
       <h3>Add A Bug Report</h3>
       <form
         onSubmit={(event) => {
@@ -79,7 +79,7 @@ export default function ReportForm({SERVER_URL}) {
               setTitle(event.target.value);
             }}
             type="text"
-            className="form-control"
+            className="form-control w-25 mb-3"
             id="title-input"
           />
         </div>
@@ -93,8 +93,9 @@ export default function ReportForm({SERVER_URL}) {
             onChange={(event) => {
               setIssueDescription(event.target.value);
             }}
-            className="form-control"
+            className="form-control w-75 mb-3"
             id="issueDescription-input"
+            rows="5"
           />
         </div>
 
@@ -107,18 +108,19 @@ export default function ReportForm({SERVER_URL}) {
             onChange={(event) => {
               setReplicationInstructions(event.target.value);
             }}
-            className="form-control"
+            className="form-control w-75 mb-3"
             id="replicationInstructions-input"
+            rows="5"
           />
         </div>
 
-        <div className="d-flex m-2 flex-column justify-content-center">
+        <div className="d-flex m-2 flex-column justify-content-center w-25">
           <button type="submit" className="btn btn-primary ">
             Submit Report
           </button>
         </div>
 
-        <div className="d-flex m-2 flex-column justify-content-center">
+        <div className="d-flex m-2 flex-column justify-content-center w-25">
           <button className="btn btn-danger" onClick={() => cancelAdd()}>
             Cancel Report
           </button>
