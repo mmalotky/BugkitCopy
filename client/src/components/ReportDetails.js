@@ -82,6 +82,10 @@ function ReportDetails({report, refresh, SERVER_URL}) {
     }
 
     const getMessages = function () {
+        if (!report) {
+            return;
+        }
+
         fetch(SERVER_URL + "/api/messages/" + report.reportId)
         .then((response) => {
             console.log(response);
