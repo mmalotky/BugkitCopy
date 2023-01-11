@@ -54,4 +54,13 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
         message.setMessageId(keyHolder.getKey().intValue());
         return message;
     }
+
+    @Override
+    public boolean deleteMessage(int messageId) {
+        final String sql = """
+                DELETE from messages
+                where message_id = ?
+                """;
+        return jdbcTemplate.update(sql, messageId) > 0;
+    }
 }
