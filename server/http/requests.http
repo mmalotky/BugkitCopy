@@ -80,3 +80,7 @@ GET {{url}}/api/users
 Authorization: Bearer {{token}}
 
 ###
+
+GET {{url}}/api/messages/1
+
+###
