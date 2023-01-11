@@ -8,5 +8,5 @@ public interface MessageRepository {
 
     List<Message> findAllForReport(int reportId);
 
-    Message create(Message message);
+    Message create(Message message, String username, int reportId);
 }

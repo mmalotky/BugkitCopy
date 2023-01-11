@@ -7,9 +7,17 @@ public class Message {
     private String message;
     private LocalDate postDate;
     private String authorUsername;
+    private int reportId;
 
     public Message() {
 
+    }
+
+    public Message(String message, LocalDate postDate, String authorUsername, int reportId) {
+        this.message = message;
+        this.postDate = postDate;
+        this.authorUsername = authorUsername;
+        this.reportId = reportId;
     }
 
     public Message(int messageId, String message, LocalDate postDate, String authorUsername) {

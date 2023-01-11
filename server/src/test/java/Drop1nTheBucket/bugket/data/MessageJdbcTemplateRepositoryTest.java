@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,6 +35,16 @@ class MessageJdbcTemplateRepositoryTest {
     void shouldFindAllForReport() {
         List<Message> messages = repository.findAllForReport(3);
         assertEquals(1, messages.size());
+    }
+
+    @Test
+    void shouldAddMessage() {
+        Message message = new Message(
+                "This bug always happens to me too. Not sure why", LocalDate.of(2022,10, 10), "test", 2
+        );
+        Message actual = repository.create(message);
+        assertNotNull(actual);
+        assertEquals("test", message.getAuthorUsername());
     }
 
 }
