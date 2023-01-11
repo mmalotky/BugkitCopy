@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Message from "./Message";
+import MessageForm from "./MessageForm";
 
 function ReportDetails({report, refresh, SERVER_URL}) {
     const VOTE_URL = SERVER_URL + "/api/vote";
@@ -151,6 +152,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
             }
             <h4>Messages</h4>
             {
+                messages.length > 0 ?
                 messages.map((message) => {
                     return <Message 
                         key={message.messageId} 
@@ -159,8 +161,18 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                         getMessages={getMessages}
                     />
                 })
+                : <p>No current messages.</p>
             }
-
+            {
+                context ?
+                <MessageForm 
+                    report={report} 
+                    SERVER_URL={SERVER_URL}
+                    getMessages={getMessages}
+                />
+                : <></>
+            }
+            
         </div>
     );
 }
