@@ -2,8 +2,11 @@ package Drop1nTheBucket.bugket.data;
 
 import Drop1nTheBucket.bugket.models.Message;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
@@ -26,5 +29,28 @@ public class MessageJdbcTemplateRepository implements MessageRepository {
                 where r.report_id = ?;
                 """;
         return jdbcTemplate.query(sql, new MessageMapper(), reportId);
+    }
+
+    @Override
+    public Message create(Message message) {
+        final String sql = """
+                INSERT into message (message, post_date, user_id)
+                values (?,?,(SELECT user_id from registered_user where username = ?),?)
+                """;
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, message.getMessage());
+            ps.setDate(2, java.sql.Date.valueOf(message.getPostDate()));
+            ps.setString(3, message.getAuthorUsername());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+        message.setMessageId(keyHolder.getKey().intValue());
+        return message;
     }
 }

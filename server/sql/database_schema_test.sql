@@ -62,12 +62,17 @@ create table messages (
 delimiter //
 create procedure set_known_good_state()
 begin
+
+	delete from messages;
+    alter table messages auto_increment = 1;
+
 	delete from votes;
     delete from reports;
     alter table reports auto_increment = 1;
 
     delete from registered_user;
     alter table registered_user auto_increment = 1;
+
 
     insert into registered_user(username,password_hash, role_id) values
 		("admin", "$2a$12$M97L0g/BETfVkdrWu98lWu29w1T232KW8CtJ8Q4XfP/NISiEy71xq", 3),
