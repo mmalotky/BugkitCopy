@@ -1,6 +1,6 @@
 @url = http://ec2-18-208-151-222.compute-1.amazonaws.com:8080
 
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMzI5MjkyfQ.sn_GwwhrqmqkBK3hja0OYAwcRVJmj9hHbkp0OIDYzGQ
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMzk1MjY2fQ.Y2kq264AJZa8Y7XGvnOFTnCL8OPbbF4aaxU9FeZM_5U
 
 
 ###
@@ -72,6 +72,11 @@ Authorization: Bearer {{token}}
 ###
 
 GET {{url}}/api/vote/check/1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/api/users
 Authorization: Bearer {{token}}
 
 ###

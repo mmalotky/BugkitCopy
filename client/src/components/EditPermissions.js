@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import UserPermission from "./UserPermission";
 import SearchBar from "./SearchBar";
 
-function EditPermissions(SERVER_URL) {
+function EditPermissions({SERVER_URL}) {
     const context = useContext(AuthContext);
     const [userList, setUserList] = useState([]);
     const [hidden, setHidden] = useState([]);
@@ -11,7 +11,8 @@ function EditPermissions(SERVER_URL) {
 
     const getAll = function() {
         setLoaded(false);
-        fetch(SERVER_URL + "/api/users", {
+
+        fetch(`${SERVER_URL}/api/users`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${context.token}`
