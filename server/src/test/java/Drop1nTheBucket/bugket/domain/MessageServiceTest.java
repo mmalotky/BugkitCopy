@@ -20,7 +20,7 @@ class MessageServiceTest {
     @Test
     void shouldFindAll() {
         List<Message> expected = repository.findAllForReport(1);
-        List<Message> actual = service.findAll(1);
+        List<Message> actual = service.getMessagesById(1);
 
         assertEquals(expected.size(), actual.size());
     }

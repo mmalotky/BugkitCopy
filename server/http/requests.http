@@ -1,7 +1,6 @@
-@url = http://ec2-18-208-151-222.compute-1.amazonaws.com:8080
+@url = http://localhost:8080
 
-@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczMzk1MjY2fQ.Y2kq264AJZa8Y7XGvnOFTnCL8OPbbF4aaxU9FeZM_5U
-
+@token = eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJidWctcmVwb3J0Iiwic3ViIjoiYWRtaW4iLCJhdXRob3JpdGllcyI6IkFETUlOIiwiZXhwIjoxNjczNDY2Mzg2fQ.EnWYvVdBHBhPuFFYCE7qzzWEyfaVEL7jrmKGHzDEMvo
 
 ###
 
@@ -81,6 +80,25 @@ Authorization: Bearer {{token}}
 
 ###
 
-GET {{url}}/api/messages/1
+GET {{url}}/api/messages/2
+
+###
+
+POST {{url}}/api/messages
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "message": "Testing 2",
+    "postDate": "2022-03-11",
+    "authorUsername": "admin",
+    "reportId": 2
+}
+
+###
+
+DELETE {{url}}/api/messages/1
+Authorization: Bearer {{token}}
+
 
 ###

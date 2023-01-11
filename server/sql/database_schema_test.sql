@@ -50,7 +50,6 @@ create table messages (
     post_date date not null,
     user_id int not null,
     report_id int not null,
-    constraint uc_messages unique (user_id, report_id),
     constraint fk_messages_registered_user
 		foreign key(user_id)
         references registered_user(user_id),
