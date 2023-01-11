@@ -145,11 +145,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 )
                 : <></>
             }
-            {
-                messages.length > 0 ?
-                <h4>Messages</h4>
-                : <></>
-            }
+            <h4>Messages</h4>
             {
                 messages.map((message) => {
                     return <Message 
