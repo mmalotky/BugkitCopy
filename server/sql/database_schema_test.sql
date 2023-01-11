@@ -44,6 +44,21 @@ create table votes (
         references reports(report_id)
 );
 
+create table messages (
+	message_id int primary key auto_increment,
+    message varchar(1024) not null,
+    post_date date not null,
+    user_id int not null,
+    report_id int not null,
+    constraint uc_messages unique (user_id, report_id),
+    constraint fk_messages_registered_user
+		foreign key(user_id)
+        references registered_user(user_id),
+	constraint fk_messages_reports
+		foreign key (report_id)
+        references reports(report_id)
+);
+
 delimiter //
 create procedure set_known_good_state()
 begin
@@ -68,6 +83,10 @@ begin
         (1, 2),
         (2, 2);
 
+    insert into messages (message, post_date, user_id, report_id) values
+     ("I had the same problem. I just plugged my charger in and it seemed to work", "2023-01-01", 1, 2),
+     ("It happened to me as well. I just restarted Word and that seemed to work", "2022-12-25", 1, 3);
+
 end //
 delimiter ;
 
@@ -89,3 +108,7 @@ insert into votes (user_id, report_id) values
 		(1, 1),
         (1, 2),
         (2, 2);
+
+insert into messages (message, post_date, user_id, report_id) values
+  ("I had the same problem. I just plugged my charger in and it seemed to work", "2023-01-01", 1, 2),
+     ("It happened to me as well. I just restarted Word and that seemed to work", "2022-12-25", 1, 3);
