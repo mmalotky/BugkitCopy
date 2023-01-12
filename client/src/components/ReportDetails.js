@@ -191,7 +191,7 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
       <h3>Report Details</h3>
       <div className="p-3 text-left bg-white border overflow-hidden shadow">
         <div className="d-flex">
-          <h5 className="mr-auto text-truncate w-50">{report.title}</h5>
+          <h5 className="mr-auto w-70 overflow-hidden">{report.title}</h5>
 
           <p className="m-1">Votes: {report.voteCount}</p>
 
