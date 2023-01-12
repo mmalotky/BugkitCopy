@@ -35,7 +35,7 @@ function UserPermission({username, role, SERVER_URL}) {
     return (
         <div>
             <form onSubmit={handleSubmit} style={{width:"17rem"}} className="border rounded p-3 bg-white m-2 shadow overflow-hidden">
-                <h4 className="m-1 text-uppercase text-info">{username}</h4>
+                <h4 className="m-1 text-uppercase text-info text-truncate">{username}</h4>
                 <div className="d-flex">
                     <select name="role" onChange={handleChange} value={newRole} className="form-control m-1">
                         <option value="USER">User</option>

@@ -116,18 +116,23 @@ export default function ReportForm({ SERVER_URL }) {
             rows="5"
           />
         </div>
-
-        <div className="d-flex m-2 flex-column justify-content-center w-25">
-          <button type="submit" className="btn btn-primary ">
-            Submit Report
-          </button>
+        
+        <div className="d-flex justify-content-center w-75">
+          <div className="d-flex m-2 flex-column justify-content-center w-25">
+            <button type="submit" className="btn btn-primary ">
+              Submit Report
+            </button>
+          </div>
+          <div className="d-flex m-2 flex-column justify-content-center w-25">
+            <button className="btn btn-danger" onClick={() => cancelAdd()}>
+              Cancel Report
+            </button>
+          </div>
+          
         </div>
+        
 
-        <div className="d-flex m-2 flex-column justify-content-center w-25">
-          <button className="btn btn-danger" onClick={() => cancelAdd()}>
-            Cancel Report
-          </button>
-        </div>
+        
       </form>
       <section id="errors">
         {errors.length > 0 ? (
