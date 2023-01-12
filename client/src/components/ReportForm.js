@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
-export default function ReportForm({SERVER_URL}) {
+export default function ReportForm({ SERVER_URL }) {
   const [title, setTitle] = useState("");
   const [issueDescription, setIssueDescription] = useState("");
   const [replicationInstructions, setReplicationInstructions] = useState("");
@@ -62,77 +62,92 @@ export default function ReportForm({SERVER_URL}) {
   };
 
   return (
-    <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5">
-      <h3>Add A Bug Report</h3>
-      <form
-        onSubmit={(event) => {
-          handleSubmit(event);
-        }}
-      >
-        <div>
-          <label className="form-label" htmlFor="titleInput">
-            Title:{" "}
-          </label>
-          <input
-            value={title}
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-            type="text"
-            className="form-control"
-            id="title-input"
-          />
-        </div>
+    <div className="container-fluid row d-flex justify-content-center">
+      <div id="reportForm">
+        <h1>Add A Bug Report</h1>
+        <form
+          onSubmit={(event) => {
+            handleSubmit(event);
+          }}
+        >
+          <div>
+            <label className="form-label" htmlFor="titleInput">
+              Title:{" "}
+            </label>
+            <input
+              placeholder="Report Title"
+              value={title}
+              onChange={(event) => {
+                setTitle(event.target.value);
+              }}
+              type="text"
+              className="form-control w-25 mb-3 shadow-sm"
+              id="title-input"
+            />
+          </div>
 
-        <div>
-          <label className="form-label" htmlFor="issueDescriptionInput">
-            Issue Description:{" "}
-          </label>
-          <textarea
-            value={issueDescription}
-            onChange={(event) => {
-              setIssueDescription(event.target.value);
-            }}
-            className="form-control"
-            id="issueDescription-input"
-          />
-        </div>
+          <div>
+            <label className="form-label" htmlFor="issueDescriptionInput">
+              Issue Description:{" "}
+            </label>
+            <textarea
+              id="issueDescription-input"
+              placeholder="Please describe the issue you are experiencing. Be as descriptive as possible."
+              value={issueDescription}
+              onChange={(event) => {
+                setIssueDescription(event.target.value);
+              }}
+              className="form-control w-100 mb-3 shadow-sm"
+              rows="5"
+            />
+          </div>
 
-        <div>
-          <label className="form-label" htmlFor="replicationInstructionsInput">
-            Replication Instructions:{" "}
-          </label>
-          <textarea
-            value={replicationInstructions}
-            onChange={(event) => {
-              setReplicationInstructions(event.target.value);
-            }}
-            className="form-control"
-            id="replicationInstructions-input"
-          />
-        </div>
+          <div>
+            <label
+              className="form-label"
+              htmlFor="replicationInstructionsInput"
+            >
+              Replication Instructions:{" "}
+            </label>
+            <textarea
+              placeholder="What steps should we follow in order to reproduce the issue?"
+              value={replicationInstructions}
+              onChange={(event) => {
+                setReplicationInstructions(event.target.value);
+              }}
+              className="form-control w-100 mb-3 shadow-sm"
+              id="replicationInstructions-input"
+              rows="5"
+            />
+          </div>
 
-        <div className="d-flex m-2 flex-column justify-content-center">
-          <button type="submit" className="btn btn-primary ">
-            Submit Report
-          </button>
-        </div>
-
-        <div className="d-flex m-2 flex-column justify-content-center">
-          <button className="btn btn-danger" onClick={() => cancelAdd()}>
-            Cancel Report
-          </button>
-        </div>
-      </form>
-      <section id="errors">
-        {errors.length > 0 ? (
-          <ul>
-            {errors.map((error) => {
-              return <li key={error}>{error}</li>;
-            })}
-          </ul>
-        ) : null}
-      </section>
+          <div className="d-flex justify-content-center w-100">
+            <div className="d-flex m-2 flex-column justify-content-center w-25">
+              <button className="btn btn-danger" onClick={() => cancelAdd()}>
+                Cancel Report
+              </button>
+            </div>
+            <div className="d-flex m-2 flex-column justify-content-center w-25">
+              <button
+                id="submitReport"
+                type="submit"
+                className="btn btn-primary "
+              >
+                Submit Report
+              </button>
+            </div>
+          </div>
+        </form>
+        <section id="errors">
+          {errors.length > 0 ? (
+            <ul>
+              {errors.map((error) => {
+                return <li key={error}>{error}</li>;
+              })}
+            </ul>
+          ) : null}
+        </section>
+      </div>
     </div>
   );
 }

@@ -20,6 +20,7 @@ import ReportForm from "./components/ReportForm";
 function App() {
   const SERVER_URL = "http://ec2-18-208-151-222.compute-1.amazonaws.com:8080";
 
+
   let currentUserData = localStorage.getItem("userData");
 
   if (currentUserData) {
@@ -40,16 +41,34 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="bugs" element={<ViewBugs SERVER_URL={SERVER_URL} />} />
-          <Route 
-            path="add" 
-            element={user ? <ReportForm SERVER_URL={SERVER_URL}/> : <Navigate to="/"/>} 
+          <Route
+            path="add"
+            element={
+              user ? (
+                <ReportForm SERVER_URL={SERVER_URL} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route path="contact" element={<Contact />} />
-          <Route path="login" element={<Login setUser={setUser} SERVER_URL={SERVER_URL}/>} />
-          <Route path="create_account" element={<CreateAccount SERVER_URL={SERVER_URL}/>} />
+          <Route
+            path="login"
+            element={<Login setUser={setUser} SERVER_URL={SERVER_URL} />}
+          />
+          <Route
+            path="create_account"
+            element={<CreateAccount SERVER_URL={SERVER_URL} />}
+          />
           <Route
             path="edit_permissions"
-            element={admin ? <EditPermissions SERVER_URL={SERVER_URL}/> : <Navigate to="/" />}
+            element={
+              admin ? (
+                <EditPermissions SERVER_URL={SERVER_URL} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
