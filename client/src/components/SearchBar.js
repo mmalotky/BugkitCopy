@@ -14,8 +14,8 @@ function SearchBar({search}) {
     }
 
     return (
-        <form className="form" onSubmit={handleSearch}>
-            <input value={searchTerm} onChange={handleChange} className="form-control form-control-sm m-1"/>
+        <form style={{height:"2.5rem"}} className="form d-flex m-2" onSubmit={handleSearch}>
+            <input value={searchTerm} onChange={handleChange} className="form-control form-control-sm border-primary m-1"/>
             <button type="submit" className="btn btn-primary btn-sm m-1">Search</button>
         </form>
     );
