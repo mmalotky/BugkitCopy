@@ -88,13 +88,22 @@ public class ReportsService {
         if (report.getTitle().length() > 100) {
             result.addMessage(ActionStatus.INVALID, "Title must be less than 100 characters");
         }
+        if(report.getTitle().matches(".*\\S{40,}.*")) {
+            result.addMessage(ActionStatus.INVALID, "Please do not spam characters");
+        }
         if (report.getIssueDescription().length() > 1024) {
             result.addMessage(ActionStatus.INVALID, "The issue description is too long. " +
                     "Please shorten it and try again");
         }
+        if(report.getIssueDescription().matches(".*\\S{40,}.*")) {
+            result.addMessage(ActionStatus.INVALID, "Please do not spam characters");
+        }
         if (report.getReplicationInstructions().length() > 1024) {
             result.addMessage(ActionStatus.INVALID, "The replication instructions are too long. " +
                     "Please shorten them and try again");
+        }
+        if(report.getReplicationInstructions().matches(".*\\S{40,}.*")) {
+            result.addMessage(ActionStatus.INVALID, "Please do not spam characters");
         }
         return result;
     }

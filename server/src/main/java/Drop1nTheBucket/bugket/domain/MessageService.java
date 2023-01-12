@@ -5,7 +5,6 @@ import Drop1nTheBucket.bugket.data.MessageRepository;
 import Drop1nTheBucket.bugket.models.Message;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Service
@@ -47,10 +46,16 @@ public class MessageService {
         Result<Message> result = new Result<>();
         if (message == null) {
             result.addMessage(ActionStatus.INVALID, "Message cannot be null");
+            return result;
         }
         if(message.getMessage() == null) {
             result.addMessage(ActionStatus.INVALID, "Message text cannot be null");
+            return result;
         }
+        if(message.getMessage().matches(".*\\S{40,}.*")) {
+            result.addMessage(ActionStatus.INVALID, "Please do not spam characters");
+        }
+
         return result;
 
     }

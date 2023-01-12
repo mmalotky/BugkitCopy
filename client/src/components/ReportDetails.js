@@ -93,7 +93,8 @@ function ReportDetails({report, refresh, SERVER_URL}) {
             return response.json();
         })
         .then((json) => {
-            setMessages(json);
+            const sorted = json.reverse();
+            setMessages(sorted);
         })
     }
 
@@ -111,9 +112,12 @@ function ReportDetails({report, refresh, SERVER_URL}) {
     return (
         <div className="col text-center m-3 p-3">
             <h3>Report Details</h3>
-            <div className="p-3 text-left bg-white border">
+            <div className="p-3 text-left bg-white border overflow-hidden">
                 <div className="d-flex">
-                    <h5 className="mr-auto">{report.title}</h5>
+                    <div className="mr-auto w-50 overflow-hidden">
+                        <h5 className="text-truncate">{report.title}</h5>
+                    </div>
+                    
                     
                     <p className="m-1">Votes: {report.voteCount}</p>
 
@@ -132,23 +136,23 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 <div className="d-flex justify-content-between">
                     {
                         report.completionStatus ?
-                        <p className="text-success">Complete</p>
-                        : <p className="text-danger">Incomplete</p>
+                        <p className="text-success">Resolved</p>
+                        : <p className="text-danger">Unresolved</p>
                     }
 
                     {
                         auth ?
                         (
                             report.completionStatus ?
-                            <button className="btn btn-danger btn-sm m-1" type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
-                            : <button className="btn btn-success btn-sm m-1" type="button" onClick={() => updateStatus(true)}>Mark as Complete</button>
+                            <button className="btn btn-danger btn-sm m-1" type="button" onClick={() => updateStatus(false)}>Mark as Unresolved</button>
+                            : <button className="btn btn-success btn-sm m-1" type="button" onClick={() => updateStatus(true)}>Mark as Resolved</button>
                         )
                         : <></>
                     }
                 </div>
                 
 
-                <p>By: <span className="text-info text-uppercase">{report.authorUsername}</span> | Posted: {new Date(report.postDate).toLocaleDateString("en-US")}</p>
+                <p>By: <span className="d-flex text-info text-uppercase text-truncate w-100">{report.authorUsername}</span> | Posted: {new Date(report.postDate).toLocaleDateString("en-US")}</p>
 
                 <h6>Issue Description</h6>
                 <p>{report.issueDescription}</p>

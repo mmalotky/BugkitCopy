@@ -110,8 +110,8 @@ public class AppUserService implements UserDetailsService {
             return result;
         }
 
-        if (username.length() > 100) {
-            result.addMessage(ActionStatus.INVALID, "username must be less than 100 characters");
+        if (username.length() > 40) {
+            result.addMessage(ActionStatus.INVALID, "username must be less than 40 characters");
         }
         return result;
     }
