@@ -31,8 +31,15 @@ body {
 
 /* Button Styling */
 #createAccount {
-  background-color: #000080;
+  background-color: #5575ff;
   font-family: "Raleway", sans-serif;
+  border-color: #c3c3ff;
+}
+
+#createAccount:hover {
+  background-color: #2f55ff;
+  font-family: "Raleway", sans-serif;
+  border-color: #c3c3ff;
 }
 
 .btn-primary {
@@ -54,12 +61,17 @@ body {
   background-color: red;
 }
 #login {
-  background-color: #006400;
-  border-color: #008000;
+  background-color: #2fca2f;
+  border-color: #c3dac3;
+}
+
+#login:hover {
+  background-color: #0faf0f;
+  border-color: #c3dac3;
 }
 
 .btn {
-  border-radius: 10px;
+  border-radius: 5px;
   font-family: "Raleway", sans-serif;
 }
 
