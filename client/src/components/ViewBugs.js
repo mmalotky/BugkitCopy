@@ -171,28 +171,8 @@ function ViewBugs({SERVER_URL}) {
     }
 
     return (
-        <div className="container d-flex wv-100 bg-light pr-0 mr-3">
-            <div className=" bg-light d-flex w-50 text-center">
-                <ReportDetails
-                    report = {report}
-                    refresh = {refresh}
-                    SERVER_URL = {SERVER_URL}
-                />
-            </div>
-            <div className="col text-center m-3 p-3 w-50">
-                    <h3>Reports List</h3>
-                    <SearchBar search={search}/>
-                    {reports.length === 0 ? <div>{ loaded ? "No Reports Found" : "Loading..."}</div> :
-                    reports.map((r) => {
-                        return <div key = {r.reportId} className={hidden.includes(r) ? "d-none" : ""}>
-                            <ReportListItem
-                                report = {r}
-                                setReport = {setReport}
-                            />
-                        </div>
-                    })}
-            </div>
-            <div className="ml-auto mr-0 bg-white w-25">
+        <div className="container-fluid row">
+            <div className="col">
                 {
                     context ?
                     <ViewFilter
@@ -210,7 +190,29 @@ function ViewBugs({SERVER_URL}) {
                     : <></>
                 }
             </div>
-            
+            <div className="col-6">
+                <div className=" bg-light text-center">
+                    <ReportDetails
+                        report = {report}
+                        refresh = {refresh}
+                        SERVER_URL = {SERVER_URL}
+                    />
+                </div>
+            </div>
+            <div className="col text-center p-3 col">
+                <h3>Reports List</h3>
+                <SearchBar search={search}/>
+                {reports.length === 0 ? <div>{ loaded ? "No Reports Found" : "Loading..."}
+                </div> :
+                reports.map((r) => {
+                    return <div key = {r.reportId} className={hidden.includes(r) ? "d-none" : ""}>
+                        <ReportListItem
+                            report = {r}
+                            setReport = {setReport}
+                            />
+                </div>
+                })}
+            </div>
         </div>
     );
 }
