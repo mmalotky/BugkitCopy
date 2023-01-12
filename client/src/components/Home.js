@@ -9,7 +9,7 @@ function Home() {
   }
 
   return (
-    <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5">
+    <div className="container d-flex flex-column justify-content-center align-items-center h-100 vw-100 mt-5 p-4 bg-light shadow-sm">
       <h1>
         Welcome <span className="text-info text-uppercase">{name}</span> to
         bugket.com

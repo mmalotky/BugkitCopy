@@ -10,6 +10,7 @@ h5 {
 p {
   font-family: "Raleway", sans-serif;
   font-size: 20px;
+
 }
 
 #title-input,
@@ -32,13 +33,20 @@ textarea::placeholder {
 }
 /* Background Color */
 body {
-  background-color: #ffffff;
+  background: linear-gradient(90deg, rgba(225,225,255,255) 0%, rgba(225,225,225,255) 35%, rgba(205,205,215,255) 100%);
 }
 
 /* Button Styling */
 #createAccount {
-  background-color: #0066ff;
+  background-color: #5575ff;
   font-family: "Raleway", sans-serif;
+  border-color: #c3c3ff;
+}
+
+#createAccount:hover {
+  background-color: #2f55ff;
+  font-family: "Raleway", sans-serif;
+  border-color: #c3c3ff;
 }
 
 .btn-primary {
@@ -79,21 +87,22 @@ body {
   background-color: red;
 }
 #login {
-  background-color: #00b33c;
-  border-color: #008000;
+  background-color: #2fca2f;
+  border-color: #c3dac3;
+}
+
+#login:hover {
+  background-color: #0faf0f;
+  border-color: #c3dac3;
 }
 
 .btn {
-  border-radius: 10px;
-  font-family: inherit;
+  border-radius: 5px;
   font-family: "Raleway", sans-serif;
 }
 
 /* Report Form Styling */
 #reportForm {
-  align-content: center;
+  width: 50em;
   padding: 30px;
-  margin-top: auto;
-  margin-left: 250px;
-  margin-right: 250px;
 }
