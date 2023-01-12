@@ -128,7 +128,11 @@ export default function ReportForm({ SERVER_URL }) {
               </button>
             </div>
             <div className="d-flex m-2 flex-column justify-content-center w-25">
-              <button type="submit" className="btn btn-primary ">
+              <button
+                id="submitReport"
+                type="submit"
+                className="btn btn-primary "
+              >
                 Submit Report
               </button>
             </div>
