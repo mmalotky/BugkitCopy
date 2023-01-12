@@ -103,7 +103,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
         return (
             <div className="col m-3 p-3">
                 <h3>Report Details</h3>
-                <p>Select a report for more retails.</p>
+                <p>Select a report for more details.</p>
             </div>
         )
     }
@@ -137,7 +137,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                         getMessages={getMessages}
                     />
                 })
-                : <p>No current messages.</p>
+                : <p className="text-center">No current messages.</p>
             }
             {
                 context ?
