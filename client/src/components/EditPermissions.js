@@ -41,7 +41,7 @@ function EditPermissions({SERVER_URL}) {
     }
     
     return (
-        <div className="container m-5">
+        <div className="container m-5 mx-auto">
             <h1>Edit Permissions</h1>
 
             <section className="d-flex justify-content-between">

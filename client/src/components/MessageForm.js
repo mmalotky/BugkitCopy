@@ -53,7 +53,7 @@ function MessageForm({report, SERVER_URL, getMessages}) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="p-3" onSubmit={handleSubmit}>
             <h5>Post a Message</h5>
             <textarea id="message" onChange={handleChange} value={message.message} className="form-control"/>
             <button type="submit" className="btn btn-primary m-3">Post Message</button>

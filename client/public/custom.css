@@ -19,14 +19,14 @@ p {
   font-size: 20px;
 }
 
-.nav {
-  font-family: "Raleway, sans-serif";
+.navbar {
+  font-family: "Raleway", sans-serif;
   font-size: 20px;
 }
 
 /* Background Color */
 body {
-  background-color: #d3d3d3;
+  background-color: #ffffff;
 }
 
 /* Button Styling */
