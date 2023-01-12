@@ -80,7 +80,8 @@ begin
     insert into reports(title, issue_description, replication_instructions, date_of_reporting, completion_status, user_id) values
 		("Bad Error", "It broke my computer", "Throw the computer into the lake", "2022-10-12", 0, 2),
         ("Won't turn on", "My laptop won't turn on", "Watch all of Game of Thrones while unplugged", "2022-02-06", 0, 1),
-        ("Ate my homework", "The program deleted my file", "Save a Word Document at any time", "2022-03-13", 1, 1);
+        ("Ate my homework", "The program deleted my file", "Save a Word Document at any time", "2022-03-13", 1, 1),
+
 
 	insert into votes (user_id, report_id) values
 		(1, 1),
@@ -106,7 +107,8 @@ insert into registered_user(username,password_hash, role_id) values
 insert into reports(title, issue_description, replication_instructions, date_of_reporting, completion_status, user_id) values
 		("Bad Error", "It broke my computer", "Throw the computer into the lake", "2022-10-12", 0, 2),
         ("Won't turn on", "My laptop won't turn on", "Watch all of Game of Thrones while unplugged", "2022-02-06", 0, 1),
-        ("Ate my homework", "The program deleted my file", "Save a Word Document at any time", "2022-03-13", 1, 1);
+        ("Ate my homework", "The program deleted my file", "Save a Word Document at any time", "2022-03-13", 1, 1),
+        ("Search bar doesn’t work", "When I type something into the search bar and hit submit, I don’t get any results.", "Try searching for something that should normally appear on the website and you’ll see what I mean.", "2022-03-24", 0, 2);
 
 insert into votes (user_id, report_id) values
 		(1, 1),
