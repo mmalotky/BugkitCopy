@@ -17,7 +17,7 @@ function ViewFilter(props) {
                 <button className={`w-100 bg-white border${props.view === "ALL" ? " text-success" : ""}`} type="button" onClick={props.getAll}>View All</button>
                 : <></>
             }
-            <button className={`w-100 bg-white border${props.view === "INCOMPLETE" ? " text-success" : ""}`} type="button" onClick={props.getIncomplete}>Incomplete</button>
+            <button className={`w-100 bg-white border${props.view === "INCOMPLETE" ? " text-success" : ""}`} type="button" onClick={props.getIncomplete}>Unresolved</button>
             <button className={`w-100 bg-white border${props.view === "MY_REPORTS" ? " text-success" : ""}`} type="button" onClick={props.getMyReports}>My Reports</button>
             <button className={`w-100 bg-white border${props.view === "VOTED" ? " text-success" : ""}`} type="button" onClick={props.getVoted}>Voted</button>
 

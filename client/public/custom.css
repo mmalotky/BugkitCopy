@@ -24,6 +24,12 @@ p {
   font-size: 20px;
 }
 
+input::placeholder {
+  font-family: "Raleway", sans-serif;
+}
+textarea::placeholder {
+  font-family: "Raleway", sans-serif;
+}
 /* Background Color */
 body {
   background-color: #ffffff;
@@ -45,7 +51,26 @@ body {
 .btn-primary {
   background-color: #009933;
 }
+.btn-primary:focus {
+  background-color: #009933;
+}
 .btn-primary:hover {
+  background-color: #006622;
+}
+
+#submitReport:active {
+  background-color: #006622;
+}
+#search:active {
+  background-color: #006622;
+}
+#update:active {
+  background-color: #006622;
+}
+#makeComplete:active {
+  background-color: #006622;
+}
+#postMessage:active {
   background-color: #006622;
 }
 

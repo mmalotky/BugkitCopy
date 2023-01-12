@@ -40,6 +40,22 @@ class MessageServiceTest {
     }
 
     @Test
+    void shouldNotCreateSpamMessage() {
+        Message message = new Message(
+                "asdifoskenrtudhewcjeislarudownsilfesjlrod a bad idea",
+                LocalDate.of(2023, 1,11), "admin", 1
+        );
+        Result<Message> result = service.add(message);
+        assertFalse(result.isSuccess());
+
+        message.setMessage(
+                "a asdifo@kenr2udhewBjeisSarud)wns.lfes\"lrod a bad idea"
+        );
+        Result<Message> result2 = service.add(message);
+        assertFalse(result2.isSuccess());
+    }
+
+    @Test
     void shouldDelete() {
         boolean expected = repository.deleteMessage(1);
         Result actual = service.delete(1);

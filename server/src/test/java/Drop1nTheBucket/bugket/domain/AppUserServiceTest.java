@@ -101,6 +101,12 @@ class AppUserServiceTest {
     }
 
     @Test
+    void shouldNotCreateUsername40Characters() {
+        Result<AppUser> result = service.create("Extra-Supercalifragelisticexpialadocious!", "test2");
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
     void shouldEditUserRole() {
         Result<Void> result = service.editUserRoleByUsername("test", "DEV");
         assertTrue(result.isSuccess());
