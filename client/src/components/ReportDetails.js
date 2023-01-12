@@ -109,7 +109,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
     }
 
     return (
-        <div className="col text-center m-3 p-3">
+        <div className="col text-center">
             <h3>Report Details</h3>
             <div className="p-3 text-left bg-white border">
                 <h5>{report.title}</h5>
@@ -123,8 +123,33 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 <h6>Issue Description</h6>
                 <p>{report.issueDescription}</p>
 
-                <h6>Replication Instructions</h6>
+                <h6>Steps to Replicate</h6>
                 <p>{report.replicationInstructions}</p>
+
+                <h4 className="text-center">Messages</h4>
+            {
+                messages.length > 0 ?
+                messages.map((message) => {
+                    return <Message 
+                        key={message.messageId} 
+                        message={message}
+                        SERVER_URL={SERVER_URL}
+                        getMessages={getMessages}
+                    />
+                })
+                : <p className="text-center">No current messages.</p>
+            }
+            {
+                context ?
+                <MessageForm 
+                    report={report} 
+                    SERVER_URL={SERVER_URL}
+                    getMessages={getMessages}
+                />
+                : <></>
+            }
+
+
             </div>
             
 
@@ -150,28 +175,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 )
                 : <></>
             }
-            <h4>Messages</h4>
-            {
-                messages.length > 0 ?
-                messages.map((message) => {
-                    return <Message 
-                        key={message.messageId} 
-                        message={message}
-                        SERVER_URL={SERVER_URL}
-                        getMessages={getMessages}
-                    />
-                })
-                : <p>No current messages.</p>
-            }
-            {
-                context ?
-                <MessageForm 
-                    report={report} 
-                    SERVER_URL={SERVER_URL}
-                    getMessages={getMessages}
-                />
-                : <></>
-            }
+            
             
         </div>
     );
