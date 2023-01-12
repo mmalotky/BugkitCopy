@@ -118,7 +118,7 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                     <p className="text-success">Complete</p>
                     : <p className="text-danger">Incomplete</p>
                 }
-                <p>By: <span className="text-info text-uppercase">{report.authorUsername}</span> | Posted: {report.postDate}</p>
+                <p>By: <span className="text-info text-uppercase">{report.authorUsername}</span> | Posted: {new Date(report.postDate).toLocaleDateString("en-US")}</p>
 
                 <h6>Issue Description</h6>
                 <p>{report.issueDescription}</p>

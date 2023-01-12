@@ -24,7 +24,7 @@ function Message({message, SERVER_URL, getMessages}) {
 
     return (
         <div className="border m-3 p-2 bg-white rounded">
-            <p><span className="text-uppercase text-info">{message.authorUsername}</span> | {message.postDate}</p>
+            <p><span className="text-uppercase text-info">{message.authorUsername}</span> | {new Date(message.postDate).toLocaleDateString("en-US")}</p>
             <p>{message.message}</p>
             {
                 admin ?

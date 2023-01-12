@@ -41,11 +41,14 @@ function EditPermissions({SERVER_URL}) {
     }
     
     return (
-        <div className="container">
-            <h3>Edit Permissions</h3>
-            <SearchBar search={search}/>
-
-            {userList.length === 0 ? <div>{ loaded ? "No Users Found" : "Loading..."}</div> :
+        <div className="container m-5">
+            <section className="d-flex justify-content-between">
+                <h1>Edit Permissions</h1>
+                <SearchBar search={search}/>
+            </section>
+            
+            <section className="d-flex">
+                {userList.length === 0 ? <div>{ loaded ? "No Users Found" : "Loading..."}</div> :
                 userList.map((u) => {
                     return <div key={u.username} className={hidden.includes(u) ? "d-none" : ""}>
                         <UserPermission 
@@ -55,6 +58,8 @@ function EditPermissions({SERVER_URL}) {
                         />
                     </div>
                 })}
+            </section>
+            
         </div>
     );
 }
