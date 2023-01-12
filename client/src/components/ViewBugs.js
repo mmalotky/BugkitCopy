@@ -171,7 +171,7 @@ function ViewBugs({SERVER_URL}) {
     }
 
     return (
-        <div className="container-fluid row">
+        <div className="container-fluid row d-flex justify-content-center">
             <div className="col-2 mr-5">
                 {
                     context ?

@@ -189,7 +189,7 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
   return (
     <div className="col text-center m-3 p-3">
       <h3>Report Details</h3>
-      <div className="p-3 text-left bg-white border overflow-hidden">
+      <div className="p-3 text-left bg-white border overflow-hidden shadow">
         <div className="d-flex">
           <h5 className="mr-auto text-truncate w-50">{report.title}</h5>
 

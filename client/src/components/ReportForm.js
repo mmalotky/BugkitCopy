@@ -62,8 +62,8 @@ export default function ReportForm({ SERVER_URL }) {
   };
 
   return (
-    <div className="container m-3">
-      <div id="reportForm" className="mx-auto">
+    <div className="container-fluid row d-flex justify-content-center">
+      <div id="reportForm">
         <h1>Add A Bug Report</h1>
         <form
           onSubmit={(event) => {
@@ -81,7 +81,7 @@ export default function ReportForm({ SERVER_URL }) {
                 setTitle(event.target.value);
               }}
               type="text"
-              className="form-control w-25 mb-3"
+              className="form-control w-25 mb-3 shadow-sm"
               id="title-input"
             />
           </div>
@@ -97,7 +97,7 @@ export default function ReportForm({ SERVER_URL }) {
               onChange={(event) => {
                 setIssueDescription(event.target.value);
               }}
-              className="form-control w-100 mb-3"
+              className="form-control w-100 mb-3 shadow-sm"
               rows="5"
             />
           </div>
@@ -115,7 +115,7 @@ export default function ReportForm({ SERVER_URL }) {
               onChange={(event) => {
                 setReplicationInstructions(event.target.value);
               }}
-              className="form-control w-100 mb-3"
+              className="form-control w-100 mb-3 shadow-sm"
               id="replicationInstructions-input"
               rows="5"
             />

@@ -10,6 +10,7 @@ h5 {
 p {
   font-family: "Raleway", sans-serif;
   font-size: 20px;
+
 }
 
 #title-input,
@@ -32,7 +33,7 @@ textarea::placeholder {
 }
 /* Background Color */
 body {
-  background-color: #ffffff;
+  background: linear-gradient(90deg, rgba(225,225,255,255) 0%, rgba(225,225,225,255) 35%, rgba(205,205,215,255) 100%);
 }
 
 /* Button Styling */
@@ -102,9 +103,6 @@ body {
 
 /* Report Form Styling */
 #reportForm {
-  align-content: center;
+  width: 50em;
   padding: 30px;
-  margin-top: auto;
-  margin-left: 250px;
-  margin-right: 250px;
 }
