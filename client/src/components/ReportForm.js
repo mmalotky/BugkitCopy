@@ -34,9 +34,9 @@ export default function ReportForm({ SERVER_URL }) {
       headers: {
         Authorization: `Bearer ${context.token}`,
         "Content-Type": "application/json",
-        Accept: "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(report)
+      body: JSON.stringify(report),
     }).then((result) => {
       if (result.status === 201) {
         clearForm();
@@ -62,7 +62,7 @@ export default function ReportForm({ SERVER_URL }) {
   };
 
   return (
-    <div className="ml-5 mt-5">
+    <div id="reportForm">
       <h1>Add A Bug Report</h1>
       <form
         onSubmit={(event) => {
