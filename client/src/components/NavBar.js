@@ -31,16 +31,13 @@ function NavBar({ setUser }) {
             </Link>
           </li>
           <li>
-            {
-              context ? (
-                <Link className="nav-link text-white" to="/add">
-                  Add a Bug
-                </Link>
-              ) : (
-                <></>
-              )
-            }
-            
+            {context ? (
+              <Link className="nav-link text-white" to="/add">
+                Add a Bug
+              </Link>
+            ) : (
+              <></>
+            )}
           </li>
           <li>
             <Link className="nav-link text-white" to="/contact">
@@ -59,7 +56,11 @@ function NavBar({ setUser }) {
           {context ? (
             <></>
           ) : (
-            <Link className="btn btn-primary mr-4" to="/create_account">
+            <Link
+              id="createAccount"
+              className="btn btn-primary mr-4"
+              to="/create_account"
+            >
               Create Account
             </Link>
           )}
@@ -69,7 +70,7 @@ function NavBar({ setUser }) {
               Logout
             </button>
           ) : (
-            <Link to="/login" className="btn btn-primary">
+            <Link to="/login" id="login" className="btn btn-primary">
               Login
             </Link>
           )}

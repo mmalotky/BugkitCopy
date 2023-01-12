@@ -63,7 +63,7 @@ export default function ReportForm({ SERVER_URL }) {
 
   return (
     <div className="ml-5 mt-5">
-      <h3>Add A Bug Report</h3>
+      <h1>Add A Bug Report</h1>
       <form
         onSubmit={(event) => {
           handleSubmit(event);
@@ -74,6 +74,7 @@ export default function ReportForm({ SERVER_URL }) {
             Title:{" "}
           </label>
           <input
+            placeholder="Report Title"
             value={title}
             onChange={(event) => {
               setTitle(event.target.value);
@@ -89,12 +90,13 @@ export default function ReportForm({ SERVER_URL }) {
             Issue Description:{" "}
           </label>
           <textarea
+            id="issueDescription-input"
+            placeholder="Please describe the issue you are experiencing. Be as descriptive as possible."
             value={issueDescription}
             onChange={(event) => {
               setIssueDescription(event.target.value);
             }}
             className="form-control w-75 mb-3"
-            id="issueDescription-input"
             rows="5"
           />
         </div>
@@ -104,6 +106,7 @@ export default function ReportForm({ SERVER_URL }) {
             Replication Instructions:{" "}
           </label>
           <textarea
+            placeholder="What steps should we follow in order to reproduce the issue?"
             value={replicationInstructions}
             onChange={(event) => {
               setReplicationInstructions(event.target.value);
