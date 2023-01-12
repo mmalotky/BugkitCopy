@@ -56,7 +56,10 @@ function MessageForm({report, SERVER_URL, getMessages}) {
         <form className="p-3" onSubmit={handleSubmit}>
             <h5>Post a Message</h5>
             <textarea id="message" onChange={handleChange} value={message.message} className="form-control"/>
-            <button type="submit" className="btn btn-primary m-3">Post Message</button>
+            <div className="w-100 d-flex justify-content-center mt-3">
+                <button type="submit" className="btn btn-primary">Post Message</button>
+            </div>
+            
             {err.length > 0 ? (
             <ul>
                 {err.map((error) => {

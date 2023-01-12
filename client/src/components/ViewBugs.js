@@ -172,7 +172,7 @@ function ViewBugs({SERVER_URL}) {
 
     return (
         <div className="container-fluid row">
-            <div className="col">
+            <div className="col-2 mr-5">
                 {
                     context ?
                     <ViewFilter
@@ -190,8 +190,9 @@ function ViewBugs({SERVER_URL}) {
                     : <></>
                 }
             </div>
-            <div className="col-6">
-                <div className=" bg-light text-center">
+            
+            <div className="col-5 mr-5">
+                <div className="text-center">
                     <ReportDetails
                         report = {report}
                         refresh = {refresh}
@@ -199,7 +200,8 @@ function ViewBugs({SERVER_URL}) {
                     />
                 </div>
             </div>
-            <div className="col text-center p-3 col">
+            
+            <div className="col text-center p-3 col-3">
                 <h3>Reports List</h3>
                 <SearchBar search={search}/>
                 {reports.length === 0 ? <div>{ loaded ? "No Reports Found" : "Loading..."}
