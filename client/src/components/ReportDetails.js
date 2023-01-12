@@ -189,9 +189,9 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
   return (
     <div className="col text-center m-3 p-3">
       <h3>Report Details</h3>
-      <div className="p-3 text-left bg-white border">
+      <div className="p-3 text-left bg-white border overflow-hidden">
         <div className="d-flex">
-          <h5 className="mr-auto">{report.title}</h5>
+          <h5 className="mr-auto text-truncate w-50">{report.title}</h5>
 
           <p className="m-1">Votes: {report.voteCount}</p>
 
@@ -220,9 +220,9 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
 
         <div className="d-flex justify-content-between">
           {report.completionStatus ? (
-            <p className="text-success">Complete</p>
+            <p className="text-success">Resolved</p>
           ) : (
-            <p className="text-danger">Incomplete</p>
+            <p className="text-danger">Unresolved</p>
           )}
 
           {auth ? (
@@ -232,7 +232,7 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
                 type="button"
                 onClick={() => updateStatus(false)}
               >
-                Mark as Incomplete
+                Mark as Unresolved
               </button>
             ) : (
               <button
@@ -241,7 +241,7 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
                 type="button"
                 onClick={() => updateStatus(true)}
               >
-                Mark as Complete
+                Mark as Resolved
               </button>
             )
           ) : (
@@ -251,17 +251,17 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
 
         <p>
           By:{" "}
-          <span className="text-info text-uppercase">
-            {report.authorUsername}
+          <span className="d-flex text-info text-uppercase">
+            <span className="text-truncate">{report.authorUsername}</span>
           </span>{" "}
           | Posted: {new Date(report.postDate).toLocaleDateString("en-US")}
         </p>
 
         <h6>Issue Description</h6>
-        <p>{report.issueDescription}</p>
+        <p className="w-100 overflow-hidden">{report.issueDescription}</p>
 
         <h6>Replication Instructions</h6>
-        <p>{report.replicationInstructions}</p>
+        <p className="w-100 overflow-hidden">{report.replicationInstructions}</p>
 
         <h4 className="text-center mt-5">Messages</h4>
         {messages.length > 0 ? (
