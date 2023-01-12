@@ -24,6 +24,12 @@ p {
   font-size: 20px;
 }
 
+input::placeholder {
+  font-family: "Raleway", sans-serif;
+}
+textarea::placeholder {
+  font-family: "Raleway", sans-serif;
+}
 /* Background Color */
 body {
   background-color: #ffffff;
@@ -31,7 +37,7 @@ body {
 
 /* Button Styling */
 #createAccount {
-  background-color: #000080;
+  background-color: #0066ff;
   font-family: "Raleway", sans-serif;
 }
 
@@ -40,6 +46,9 @@ body {
 }
 .btn-primary:hover {
   background-color: #006622;
+}
+.btn-primary:focus {
+  background-color: #009933;
 }
 
 .btn-danger {
@@ -54,12 +63,13 @@ body {
   background-color: red;
 }
 #login {
-  background-color: #006400;
+  background-color: #00b33c;
   border-color: #008000;
 }
 
 .btn {
   border-radius: 10px;
+  font-family: inherit;
   font-family: "Raleway", sans-serif;
 }
 
