@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import Message from "./Message";
+import MessageForm from "./MessageForm";
 
 function ReportDetails({ report, refresh, SERVER_URL }) {
   const VOTE_URL = SERVER_URL + "/api/vote";

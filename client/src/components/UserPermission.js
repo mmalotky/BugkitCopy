@@ -18,7 +18,8 @@ function UserPermission({username, role, SERVER_URL}) {
         .then((response) => {
             if(response.status === 204) {
                 console.log(response);
-                setMessage("Updated");
+                setMessage("Updating...");
+                window.location.reload();
             }
             else {
                 console.log(response);
@@ -33,14 +34,17 @@ function UserPermission({username, role, SERVER_URL}) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="d-flex border rounded justify-content-around m-3">
-                <p className="m-1 text-uppercase text-info">{username}</p>
-                <select name="role" onChange={handleChange} value={newRole} className="form-control w-25 m-1">
-                    <option value="USER">User</option>
-                    <option value="DEV">Developer</option>
-                    <option value="ADMIN">Administrator</option>
-                </select>
-                <button className="btn btn-primary btn-sm m-1">Update Role</button>
+            <form onSubmit={handleSubmit} className="border rounded p-3">
+                <h3 className="m-1 text-uppercase text-info">{username}</h3>
+                <div className="d-flex">
+                    <select name="role" onChange={handleChange} value={newRole} className="form-control m-1">
+                        <option value="USER">User</option>
+                        <option value="DEV">Developer</option>
+                        <option value="ADMIN">Administrator</option>
+                    </select>
+                    <button className="btn btn-primary btn-sm m-1">Update</button>
+                </div>
+                
             </form>
             <p className="font-italic">{message}</p>
         </div>

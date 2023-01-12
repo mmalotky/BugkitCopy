@@ -34,9 +34,9 @@ export default function ReportForm({ SERVER_URL }) {
       headers: {
         Authorization: `Bearer ${context.token}`,
         "Content-Type": "application/json",
-        Accept: "application/json",
+        Accept: "application/json"
       },
-      body: JSON.stringify(report),
+      body: JSON.stringify(report)
     }).then((result) => {
       if (result.status === 201) {
         clearForm();
