@@ -112,12 +112,42 @@ function ReportDetails({report, refresh, SERVER_URL}) {
         <div className="col text-center m-3 p-3">
             <h3>Report Details</h3>
             <div className="p-3 text-left bg-white border">
-                <h5>{report.title}</h5>
-                {
-                    report.completionStatus ?
-                    <p className="text-success">Complete</p>
-                    : <p className="text-danger">Incomplete</p>
-                }
+                <div className="d-flex">
+                    <h5 className="mr-auto">{report.title}</h5>
+                    
+                    <p className="m-1">Votes: {report.voteCount}</p>
+
+                    {
+                        context ? 
+                        (
+                            voted ?
+                            <button className="btn btn-primary btn-sm m-1" type="button" onClick={removeVote}>Remove Vote</button>
+                            : <button className="btn btn-primary btn-sm m-1" type="button" onClick={submitVote}>Vote</button>
+                        )
+                        
+                        : <></>
+                    }
+                </div>
+                
+                <div className="d-flex justify-content-between">
+                    {
+                        report.completionStatus ?
+                        <p className="text-success">Complete</p>
+                        : <p className="text-danger">Incomplete</p>
+                    }
+
+                    {
+                        auth ?
+                        (
+                            report.completionStatus ?
+                            <button className="btn btn-danger btn-sm m-1" type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
+                            : <button className="btn btn-success btn-sm m-1" type="button" onClick={() => updateStatus(true)}>Mark as Complete</button>
+                        )
+                        : <></>
+                    }
+                </div>
+                
+
                 <p>By: <span className="text-info text-uppercase">{report.authorUsername}</span> | Posted: {new Date(report.postDate).toLocaleDateString("en-US")}</p>
 
                 <h6>Issue Description</h6>
@@ -149,31 +179,6 @@ function ReportDetails({report, refresh, SERVER_URL}) {
                 : <></>
             }
             </div>
-            
-
-            <p>Votes: {report.voteCount}</p>
-
-            {
-                context ? 
-                (
-                    voted ?
-                    <button className="btn btn-primary m-2" type="button" onClick={removeVote}>Remove Vote</button>
-                    : <button className="btn btn-primary m-2" type="button" onClick={submitVote}>Vote</button>
-                )
-                
-                : <></>
-            }
-            <br/>
-            {
-                auth ?
-                (
-                    report.completionStatus ?
-                    <button className="btn btn-danger m-2" type="button" onClick={() => updateStatus(false)}>Mark as Incomplete</button>
-                    : <button className="btn btn-success m-2" type="button" onClick={() => updateStatus(true)}>Mark as Complete</button>
-                )
-                : <></>
-            }
-            
         </div>
     );
 }
