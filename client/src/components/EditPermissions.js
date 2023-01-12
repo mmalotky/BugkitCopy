@@ -42,12 +42,14 @@ function EditPermissions({SERVER_URL}) {
     
     return (
         <div className="container m-5">
+            <h1>Edit Permissions</h1>
+
             <section className="d-flex justify-content-between">
-                <h1>Edit Permissions</h1>
+                <h2 className="text-secondary font-italic">Users</h2>
                 <SearchBar search={search}/>
             </section>
             
-            <section className="d-flex">
+            <section className="d-flex p-3 m-1 bg-light flex-wrap justify-content-center rounded">
                 {userList.length === 0 ? <div>{ loaded ? "No Users Found" : "Loading..."}</div> :
                 userList.map((u) => {
                     return <div key={u.username} className={hidden.includes(u) ? "d-none" : ""}>

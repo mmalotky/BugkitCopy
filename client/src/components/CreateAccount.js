@@ -69,7 +69,7 @@ function CreateAccount({SERVER_URL}) {
                 </div>
                 <div className="d-flex flex-column justify-content-center">
                     <p className="text-danger font-italic text-center mt-2">{err}</p>
-                    <button type="submit" className="btn btn-primary ">submit</button>
+                    <button type="submit" className="btn btn-primary ">Submit</button>
                 </div>     
             </form>
         </div>

@@ -1,0 +1,73 @@
+/* Text Styling */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Raleway", sans-serif;
+}
+
+p {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+}
+
+#title-input,
+#issueDescription-input,
+#replicationInstructions-input {
+  font-family: "Raleway, sans-serif";
+  font-size: 20px;
+}
+
+.nav {
+  font-family: "Raleway, sans-serif";
+  font-size: 20px;
+}
+
+/* Background Color */
+body {
+  background-color: #d3d3d3;
+}
+
+/* Button Styling */
+#createAccount {
+  background-color: #000080;
+  font-family: "Raleway", sans-serif;
+}
+
+.btn-primary {
+  background-color: #009933;
+}
+.btn-primary:hover {
+  background-color: #006622;
+}
+
+.btn-danger {
+  background-color: #ff3333;
+}
+
+.btn-danger:hover {
+  background-color: #cc0000;
+}
+
+#removeVote {
+  background-color: red;
+}
+#login {
+  background-color: #006400;
+  border-color: #008000;
+}
+
+.btn {
+  border-radius: 10px;
+  font-family: "Raleway", sans-serif;
+}
+
+/* Report Form Styling */
+#reportForm {
+  align-content: center;
+  padding: 30px;
+  margin-top: auto;
+  margin-left: 250px;
+  margin-right: 250px;
+}
