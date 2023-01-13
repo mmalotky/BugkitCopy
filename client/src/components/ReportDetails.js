@@ -191,31 +191,34 @@ function ReportDetails({ report, refresh, SERVER_URL }) {
       <h3>Report Details</h3>
       <div className="p-3 text-left bg-white border overflow-hidden shadow">
         <div className="d-flex">
-          <h5 className="mr-auto w-70 overflow-hidden">{report.title}</h5>
+          <h5 className="mr-auto w-75 overflow-hidden">{report.title}</h5>
 
-          <p className="m-1">Votes: {report.voteCount}</p>
-
-          {context ? (
-            voted ? (
-              <button
-                className="btn btn-danger btn-sm m-1"
-                type="button"
-                onClick={removeVote}
-              >
-                Remove Vote
-              </button>
+          <p style={{fontSize:"1rem"}} className="m-1 text-center">Votes: {report.voteCount}</p>
+          
+          <div>
+            {context ? (
+              voted ? (
+                <button
+                  className="btn btn-danger btn-sm m-1"
+                  type="button"
+                  onClick={removeVote}
+                >
+                  Remove Vote
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary btn-sm m-1"
+                  type="button"
+                  onClick={submitVote}
+                >
+                  Vote
+                </button>
+              )
             ) : (
-              <button
-                className="btn btn-primary btn-sm m-1"
-                type="button"
-                onClick={submitVote}
-              >
-                Vote
-              </button>
-            )
-          ) : (
-            <></>
-          )}
+              <></>
+            )}
+          </div>
+          
         </div>
 
         <div className="d-flex justify-content-between">
