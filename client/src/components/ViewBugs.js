@@ -12,7 +12,7 @@ function ViewBugs({SERVER_URL}) {
     const [hidden, setHidden] = useState([]);
     const [view, setView] = useState("");
     const [sorting, setSorting] = useState("");
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(true);
     const context = useContext(AuthContext);
 
     const getIncomplete = function() {
@@ -23,7 +23,6 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("INCOMPLETE");
-            setSorting("");
             setLoaded(true);
         })
     }
@@ -42,7 +41,6 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("ALL");
-            setSorting("");
             setLoaded(true);
         })
     }
@@ -59,7 +57,6 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("MY_REPORTS");
-            setSorting("");
             setLoaded(true);
         })
     }
@@ -76,30 +73,33 @@ function ViewBugs({SERVER_URL}) {
         .then((json) => {
             setReports(json);
             setView("VOTED");
-            setSorting("");
             setLoaded(true);
         })
     }
 
     const sortByVote = function () {
+        if(!loaded) {return;}
         const sorted = [...reports].sort((a, b) => b.voteCount - a.voteCount);
         setReports(sorted);
         setSorting("VOTE");
     }
 
     const sortByNewest = function () {
+        if(!loaded) {return;}
         const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? 1 : -1);
         setReports(sorted);
         setSorting("NEWEST");
     }
 
     const sortByOldest = function () {
+        if(!loaded) {return;}
         const sorted = [...reports].sort((a, b) => b.postDate > a.postDate ? -1 : 1);
         setReports(sorted);
         setSorting("OLDEST");
     }
 
     const sortByAuthor = function () {
+        if(!loaded) {return;}
         const sorted = [...reports].sort((a, b) => b.authorUsername > a.authorUsername ? -1 : 1);
         setReports(sorted);
         setSorting("AUTHOR");
@@ -108,7 +108,11 @@ function ViewBugs({SERVER_URL}) {
     const search = function (searchTerm) {
         let newList = [];
         reports.map((r) => {
-            if(!{...r}.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+            if(
+                !{...r}.title.toLowerCase().includes(searchTerm.toLowerCase())
+                && !{...r}.issueDescription.toLowerCase().includes(searchTerm.toLowerCase())
+                && !{...r}.replicationInstructions.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
                 newList.push(r);
             }
             return r;
@@ -151,7 +155,9 @@ function ViewBugs({SERVER_URL}) {
                 getIncomplete();
                 break;
         }
+    }
 
+    const sortView = function () {
         switch(sorting) {
             case "VOTE":
                 sortByVote();
@@ -169,6 +175,8 @@ function ViewBugs({SERVER_URL}) {
                 break;
         }
     }
+    
+    useEffect(sortView, [loaded]);
 
     return (
         <div className="container-fluid row d-flex justify-content-center">
